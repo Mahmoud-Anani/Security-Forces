@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import type { Route } from "./+types/home";
 import CrLevel from "~/components/seniorDate/cr-level";
 import StartDate from "~/components/seniorDate/startDate";
@@ -18,14 +18,42 @@ export function meta({}: Route.MetaArgs) {
     },
   ];
 }
+function DataView({
+  index,
+  component,
+  className,
+  error,
+}: {
+  index: Number;
+  component: any;
+  className?: string;
+  error: { index: Number; message: string };
+}) {
+  return (
+    <>
+      {component}
+      {error.index === index && (
+        <SubError errorMessage={error.message} classes={`${className}`} />
+      )}
+    </>
+  );
+}
+const componentsInputs = [
+  <StartDate />,
+  <CrLevel />,
+  <RedifType />,
+  <RedifTypePush />,
+];
 
 export default function SeniorDate() {
   const ref = useRef(null);
 
   const [error, setErorr] = useState({ index: -1, message: "" });
+  const [pindingState, setPindingState] = useState<boolean>(false);
   const [seniorDate, setSeniorDate] = useState("");
 
   async function handleFormSubmit(formData: any) {
+    setPindingState(true);
     setErorr({ index: -1, message: "" });
     const dataObj = {
       startDate: formData?.get("startDate"),
@@ -211,6 +239,7 @@ export default function SeniorDate() {
       }
       return;
     }
+    setPindingState(false);
   }
 
   return (
@@ -221,41 +250,17 @@ export default function SeniorDate() {
           action={handleFormSubmit}
           className={`flex  flex-col gap-2`}
         >
-          {error.index === 0 && (
-            <SubError
-              errorMessage={error.message}
-              classes={"text-red-600 text-center"}
+          {componentsInputs.map((component, index) => (
+            <DataView
+              error={error}
+              key={index}
+              index={index}
+              component={component}
+              className={`w-full`}
             />
-          )}
-          <StartDate />
-          {error.index === 1 && (
-            <SubError
-              errorMessage={error.message}
-              classes={"text-red-600 text-center"}
-            />
-          )}
-          <CrLevel />
-          {error.index === 2 && (
-            <SubError
-              errorMessage={error.message}
-              classes={"text-red-600 text-center"}
-            />
-          )}
-          <RedifType />
-          {error.index === 3 && (
-            <SubError
-              errorMessage={error.message}
-              classes={"text-red-600 text-center"}
-            />
-          )}
-          <RedifTypePush />
-          {error.index === 4 && (
-            <SubError
-              errorMessage={error.message}
-              classes={"text-red-600 text-center"}
-            />
-          )}
+          ))}
           <BtnSubmit
+            pending={pindingState}
             nativeStyls={{
               direction: "rtl",
             }}

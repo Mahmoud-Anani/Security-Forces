@@ -1,12 +1,40 @@
 import { atom } from "recoil";
 
-const seniorDateAfterCalc = atom({
-  key: "seniorDateAfterCalc",
-  default: "",
-});
-const errorSeniorDate = atom({
-  key: "errorSeniorDate",
-  default: { index: -1, message: "" },
+const nameSSFState = atom({
+  key: "nameSSFState",
+  default:
+    (typeof window !== "undefined" && localStorage.getItem("nameSSF")) || "",
 });
 
-export { seniorDateAfterCalc, errorSeniorDate };
+const listSSFs = [
+  "القاهرة",
+  "الجيزة",
+  "الإسكندرية",
+  "القليوبية",
+  "الدقهلية",
+  "الشرقية",
+  "العاشر",
+  "الغربية",
+  "المنوفية",
+  "البحيرة",
+  "كفر الشيخ",
+  "الإسماعيلية",
+  "السويس",
+  "بورسعيد",
+  "دمياط",
+  "الفيوم",
+  "بني سويف",
+  "المنيا",
+  "أسيوط",
+  "سوهاج",
+  "قنا",
+  "الأقصر",
+  "أسوان",
+  "البحر الأحمر",
+  "الوادي الجديد",
+  "مرسى مطروح",
+  "شمال سيناء",
+  "جنوب سيناء",
+];
+
+export { nameSSFState, listSSFs };

@@ -6,9 +6,10 @@ type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 function StartDate() {
   const [value, onChange] = useState<Value>(new Date());
+  const [maxDate] = useState<Date | undefined>(new Date());
   return (
     <label
-      style={{ direction: "rtl" }}
+      // style={{ direction: "rtl" }}
       className={`cursor-pointer border p-2 rounded-2xl bg-[#00000000] hover:bg-[#673ab708]`}
       htmlFor="date-of-start"
     >
@@ -25,7 +26,7 @@ function StartDate() {
         name="startDate"
         id="date-of-start"
         className={`border-0 outline-0`}
-        maxDate={new Date()}
+        maxDate={maxDate}
       />
     </label>
   );

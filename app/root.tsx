@@ -9,10 +9,11 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import { RecoilRoot } from "recoil";
 
 import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
+import Navbar from "./components/layout/Navbar";
+import { RecoilRoot } from "recoil";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -33,13 +34,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap"
+        />
         <Meta />
         <Links />
       </head>
       <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
+        <RecoilRoot>
+          <Navbar />
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </RecoilRoot>
       </body>
     </html>
   );
@@ -66,14 +74,15 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
-    </main>
+    <div
+      style={{
+        height: "100vh",
+        width: "100%",
+        background: "#000",
+        zIndex: 1,
+        position: "absolute",
+        top: 0,
+      }}
+    ></div>
   );
 }

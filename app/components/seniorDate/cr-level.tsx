@@ -5,8 +5,7 @@ function CrLevel() {
 
   return (
     <label
-      className="cursor-pointer"
-      className={`border p-2 rounded-2xl hover:bg-[#3333341d]`}
+      className={` cursor-pointer border p-2 rounded-2xl hover:bg-[#3333341d]`}
       htmlFor="cr-level"
     >
       <select
