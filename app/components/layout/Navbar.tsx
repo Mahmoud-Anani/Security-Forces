@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { useRecoilState } from "recoil";
@@ -30,6 +31,8 @@ const Navbar: React.FC = () => {
       link: "/senior-date",
     },
   ];
+  // console.log(nameSSF);
+
   return (
     <nav
       className={`p-4 ${
@@ -43,10 +46,12 @@ const Navbar: React.FC = () => {
             alt="logo"
             className="w-14 h-14 rounded-full"
           />
-          <h1 className="text-xl aref-ruqaa-bold ">
+          <h1 className="text-xl aref-ruqaa-bold">
             قوات أمن{" "}
-            <span className={`underline text-[#5f2323]`}>
-              {nameSSF.toString()}
+            <span className="underline text-[#5f2323]">
+              {typeof window !== "undefined" && nameSSF
+                ? nameSSF.toString()
+                : ""}
             </span>
           </h1>
         </Link>
