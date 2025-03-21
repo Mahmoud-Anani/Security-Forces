@@ -25,7 +25,7 @@ function StartDate() {
         value={value}
         name="startDate"
         id="date-of-start"
-        className={`border-0 outline-0`}
+        className={`border-0 outline-0 `}
         maxDate={maxDate}
       />
     </label>

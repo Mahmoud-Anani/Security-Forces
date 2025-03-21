@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { useRecoilState } from "recoil";
 import { nameSSFState } from "~/stores/seniorDate";
@@ -10,8 +10,16 @@ const Navbar: React.FC = () => {
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.body.classList.toggle("dark");
+    window && localStorage.setItem("mode", !darkMode ? "dark" : "light");
   };
 
+  useEffect(() => {
+    const mode = window && localStorage.getItem("mode");
+    if (mode === "dark") {
+      setDarkMode(true);
+      document.body.classList.add("dark");
+    }
+  }, []);
   const linksApp = [
     {
       name: "الرئيسية",
