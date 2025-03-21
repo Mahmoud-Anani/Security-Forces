@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import type { Route } from "./+types/home";
 import CrLevel from "~/components/seniorDate/cr-level";
 import StartDate from "~/components/seniorDate/startDate";
@@ -74,7 +74,6 @@ export default function SeniorDate() {
       return setErorr({ index: 4, message: "تــأكد مــن رقــم الــدفــعة" });
     }
 
-    console.log(dataObj);
     /*
 {
     "startDate": "2025",
@@ -102,6 +101,8 @@ export default function SeniorDate() {
             setSeniorDate(`01/05/${+dataObj.startDate + 3}`);
             break;
         }
+        setPindingState(false);
+
         return;
       }
       // دفعة 4
@@ -140,6 +141,8 @@ export default function SeniorDate() {
             setSeniorDate(`01/11/${+dataObj.startDate + 3}`);
             break;
         }
+        setPindingState(false);
+
         return;
       }
       // دفعة 10
@@ -159,6 +162,8 @@ export default function SeniorDate() {
             setSeniorDate(`01/02/${+dataObj.startDate + 4}`);
             break;
         }
+        setPindingState(false);
+
         return;
       }
     }
@@ -180,6 +185,8 @@ export default function SeniorDate() {
           setSeniorDate(`01/03/${+dataObj.startDate + 3}`);
           break;
       }
+      setPindingState(false);
+
       return;
     }
     // دفعة 4
@@ -199,6 +206,8 @@ export default function SeniorDate() {
           setSeniorDate(`01/06/${+dataObj.startDate + 3}`);
           break;
       }
+      setPindingState(false);
+
       return;
     }
     // دفعة 7
@@ -218,6 +227,8 @@ export default function SeniorDate() {
           setSeniorDate(`01/09/${+dataObj.startDate + 3}`);
           break;
       }
+      setPindingState(false);
+
       return;
     }
     // دفعة 10
@@ -237,9 +248,10 @@ export default function SeniorDate() {
           setSeniorDate(`01/12/${+dataObj.startDate + 3}`);
           break;
       }
+      setPindingState(false);
+
       return;
     }
-    setPindingState(false);
   }
 
   return (
@@ -248,6 +260,12 @@ export default function SeniorDate() {
         <form
           ref={ref}
           action={handleFormSubmit}
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (ref.current) {
+              handleFormSubmit(new FormData(ref.current));
+            }
+          }}
           className={`flex  flex-col gap-2`}
         >
           {componentsInputs.map((component, index) => (
