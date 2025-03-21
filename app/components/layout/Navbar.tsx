@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { useRecoilState } from "recoil";
 import { nameSSFState } from "~/stores/seniorDate";
-
+import logo from "~/../public/favicon.ico";
 const Navbar: React.FC = () => {
   const [nameSSF, setNameSSF] = useRecoilState(nameSSFState);
   const [darkMode, setDarkMode] = useState(false);
@@ -31,7 +31,6 @@ const Navbar: React.FC = () => {
       link: "/senior-date",
     },
   ];
-  // console.log(nameSSF);
 
   return (
     <nav
@@ -41,14 +40,10 @@ const Navbar: React.FC = () => {
     >
       <div className="container mx-auto flex justify-between items-center">
         <Link to={"/"} className={`flex items-center gap-2`}>
-          <img
-            src="/public/favicon.ico"
-            alt="logo"
-            className="w-14 h-14 rounded-full"
-          />
+          <img src={logo} alt="logo" className="w-14 h-14 rounded-full" />
           <h1 className="text-xl aref-ruqaa-bold">
             قوات أمن{" "}
-            <span className="underline text-[#5f2323]">
+            <span className="underline text-[#cc6969]">
               {typeof window !== "undefined" && nameSSF
                 ? nameSSF.toString()
                 : ""}
@@ -70,7 +65,7 @@ const Navbar: React.FC = () => {
         </ul>
         <button
           onClick={toggleDarkMode}
-          className="cursor-pointer px-2 py-1 rounded-md border border-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="cursor-pointer px-2 py-1 rounded-md border border-gray-300 hover:bg-gray-100 dark:hover:bg-[#0000001f]"
         >
           {!darkMode ? "🌙" : "☀️"}
         </button>

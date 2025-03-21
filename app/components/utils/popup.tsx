@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { listSSFs } from "~/stores/seniorDate";
+import logo from "~/../public/favicon.ico";
 
 interface PopupProps {
   isVisible: boolean;
@@ -35,11 +36,7 @@ const Popup: React.FC<PopupProps> = ({
           ❌
         </button>
         <div className="flex flex-col items-center gap-4 sm:p-4 py-2 rounded-lg ">
-          <img
-            src="/public/favicon.ico"
-            alt="logo"
-            className="w-40 h-40 rounded-full"
-          />
+          <img src={logo} alt="logo" className="w-40 h-40 rounded-full" />
           <div className="flex gap-1 justify-center items-center">
             <h2>{title}</h2>
           </div>
