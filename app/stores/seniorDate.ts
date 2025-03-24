@@ -2,39 +2,26 @@ import { atom } from "recoil";
 
 const nameSSFState = atom({
   key: "nameSSFState",
-  default:
-    (typeof window !== "undefined" && localStorage.getItem("nameSSF")) || "",
+  default: "",
+});
+const SeniorDataErrors = atom({
+  key: "SeniorDataErrors",
+  default: { index: -1, message: "" },
+});
+const sidebarState = atom({
+  key: "sidebarState",
+  default: false,
+});
+export const isPopupVisibleState = atom({
+  key: "isPopupVisibleState",
+  default: false,
+});
+export const isDarkModeState = atom({
+  key: "isDarkModeState",
+  default: false,
 });
 
-const listSSFs = [
-  "القاهرة",
-  "الجيزة",
-  "الإسكندرية",
-  "القليوبية",
-  "الدقهلية",
-  "الشرقية",
-  "العاشر",
-  "الغربية",
-  "المنوفية",
-  "البحيرة",
-  "كفر الشيخ",
-  "الإسماعيلية",
-  "السويس",
-  "بورسعيد",
-  "دمياط",
-  "الفيوم",
-  "بني سويف",
-  "المنيا",
-  "أسيوط",
-  "سوهاج",
-  "قنا",
-  "الأقصر",
-  "أسوان",
-  "البحر الأحمر",
-  "الوادي الجديد",
-  "مرسى مطروح",
-  "شمال سيناء",
-  "جنوب سيناء",
-];
 
-export { nameSSFState, listSSFs };
+
+
+export { nameSSFState,  SeniorDataErrors, sidebarState };

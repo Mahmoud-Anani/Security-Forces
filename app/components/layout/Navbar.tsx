@@ -1,12 +1,18 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router";
 import { useRecoilState } from "recoil";
-import { nameSSFState } from "~/stores/seniorDate";
+import {
+  isDarkModeState,
+  nameSSFState,
+  sidebarState,
+} from "~/stores/seniorDate";
 import logo from "~/../public/favicon.ico";
+import { linksApp } from "~/stores/mainData";
 const Navbar: React.FC = () => {
   const [nameSSF, setNameSSF] = useRecoilState(nameSSFState);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useRecoilState(isDarkModeState);
+  const [, setSidebar] = useRecoilState(sidebarState);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -21,16 +27,6 @@ const Navbar: React.FC = () => {
       document.body.classList.add("dark");
     }
   }, []);
-  const linksApp = [
-    {
-      name: "الرئيسية",
-      link: "/",
-    },
-    {
-      name: "تاريخ التسريح",
-      link: "/senior-date",
-    },
-  ];
 
   return (
     <nav
@@ -38,7 +34,7 @@ const Navbar: React.FC = () => {
         darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
       } shadow-md`}
     >
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex justify-between items-center relative">
         <Link to={"/"} className={`flex items-center gap-2`}>
           <img src={logo} alt="logo" className="w-14 h-14 rounded-full" />
           <h1 className="text-xl aref-ruqaa-bold">
@@ -51,7 +47,7 @@ const Navbar: React.FC = () => {
           </h1>
         </Link>
         {/* Links */}
-        <ul className="flex gap-4">
+        <ul className="hidden sm:flex gap-4 absolute left-[50%] -translate-x-[50%]">
           {linksApp.map((link, index) => (
             <li key={index}>
               <Link
@@ -63,12 +59,41 @@ const Navbar: React.FC = () => {
             </li>
           ))}
         </ul>
-        <button
-          onClick={toggleDarkMode}
-          className="cursor-pointer px-2 py-1 rounded-md border border-gray-300 hover:bg-gray-100 dark:hover:bg-[#0000001f]"
-        >
-          {!darkMode ? "🌙" : "☀️"}
-        </button>
+
+        <div className={`flex gap-4 items-center`}>
+          <button
+            onClick={toggleDarkMode}
+            className={`cursor-pointer p-[10px] rounded-[5px] ${
+              darkMode ? `bg-[#161c25a1]` : `bg-[#f0f0f082]`
+            }`}
+          >
+            {!darkMode ? "🌙" : "☀️"}
+          </button>
+          {/* toggle menu (Side Bar) */}
+          <button
+            className={`sm:hidden block p-[10px] rounded-[5px] ${
+              darkMode ? `bg-[#161c25a1]` : `bg-[#f0f0f082]`
+            }`}
+            onClick={() => {
+              setSidebar((prive) => !prive);
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </nav>
   );

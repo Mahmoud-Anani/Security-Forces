@@ -7,10 +7,12 @@ import { useRef } from "react";
 import BtnSubmit from "~/components/btnForm";
 import SubError from "~/components/seniorDate/subError";
 import RedifTypePush from "~/components/seniorDate/RedifType-push";
+import { isDarkModeState, SeniorDataErrors } from "~/stores/seniorDate";
+import { useRecoilState } from "recoil";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Calc Senior Date" },
+    { title: "حــسـاب تــاريــخ تــســريــح الـمـجـنـد" },
     {
       name: "description",
       content:
@@ -48,9 +50,11 @@ const componentsInputs = [
 export default function SeniorDate() {
   const ref = useRef(null);
 
-  const [error, setErorr] = useState({ index: -1, message: "" });
+  const [error, setErorr] = useRecoilState(SeniorDataErrors);
   const [pindingState, setPindingState] = useState<boolean>(false);
   const [seniorDate, setSeniorDate] = useState("");
+
+  const [darkMode, setDarkMode] = useRecoilState(isDarkModeState);
 
   async function handleFormSubmit(formData: any) {
     setPindingState(true);
@@ -62,16 +66,23 @@ export default function SeniorDate() {
       redifTypePush: formData?.get("redifTypePush"),
     };
     if (!dataObj.redifType && !dataObj.startDate) {
+      setPindingState(false);
       return setErorr({ index: 0, message: "تــأكد مــن الــبيانــات" });
     }
     if (!dataObj.startDate) {
-      return setErorr({ index: 1, message: "تــأكد مــن تـاريخ الـتـجنيد" });
+      setPindingState(false);
+      return setErorr({ index: 1, message: "تــأكد مــن سـنـه الـتـجنيد" });
     }
     if (!dataObj.redifType) {
-      return setErorr({ index: 3, message: "تــأكد مــن تـاريخ الـمؤهــل" });
+      setPindingState(false);
+      return setErorr({ index: 2, message: "تــأكد مــن نــوع الـرديـف" });
     }
+    // if (!dataObj.crLevel) {
+    //   return setErorr({ index: 3, message: "تــأكد مــن نــوع الـرديـف" });
+    // }
     if (!dataObj.redifTypePush) {
-      return setErorr({ index: 4, message: "تــأكد مــن رقــم الــدفــعة" });
+      setPindingState(false);
+      return setErorr({ index: 3, message: "تــأكد مــن رقــم الــدفــعة" });
     }
 
     /*
@@ -256,17 +267,23 @@ export default function SeniorDate() {
 
   return (
     <>
-      <div className={`flex justify-center h-[100vh] items-center`}>
+      <div className={`flex justify-center mt-16 `}>
         <form
           ref={ref}
-          action={handleFormSubmit}
+          // action={handleFormSubmit}
           onSubmit={(e) => {
             e.preventDefault();
+            console.log("tex");
+
             if (ref.current) {
               handleFormSubmit(new FormData(ref.current));
             }
           }}
-          className={`flex  flex-col gap-2`}
+          className={`flex flex-col gap-4 rounded-[5px] p-[15px] ${
+            darkMode
+              ? "bg-[#242f3e] shadow-[3px_5px_6px_3px_#2318189e]"
+              : "shadow-[3px_5px_6px_3px_#2318187d]"
+          }`}
         >
           {componentsInputs.map((component, index) => (
             <DataView
@@ -274,7 +291,7 @@ export default function SeniorDate() {
               key={index}
               index={index}
               component={component}
-              className={`w-full`}
+              className={`w-full text-[14px] py-1 bg-red-400 text-white rounded-[2px] text-center`}
             />
           ))}
           <BtnSubmit

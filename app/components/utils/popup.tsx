@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { listSSFs } from "~/stores/seniorDate";
+import React, { useEffect, useState } from "react";
 import logo from "~/../public/favicon.ico";
+import { listSSFs } from "~/stores/mainData";
 
 interface PopupProps {
   isVisible: boolean;
@@ -25,6 +25,11 @@ const Popup: React.FC<PopupProps> = ({
     }
     onClose();
   };
+
+  useEffect(() => {
+    document.body.style.maxHeight = "100vh";
+    document.body.style.overflow = "hidden";
+  }, []);
 
   return (
     <>

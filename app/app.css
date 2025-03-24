@@ -27,3 +27,13 @@ body, html {
   font-style: normal;
 }
 
+#cr-level option {
+  background-color: #2d1c1c !important;
+  color: aliceblue;
+  cursor: pointer;
+}
+
+
+.react-date-picker__wrapper {
+  border: none !important;
+}
