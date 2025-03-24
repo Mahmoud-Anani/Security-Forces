@@ -1,6 +1,6 @@
 # Security Forces Project Documentation
 
-![Logo]<img src="./public/favicon.ico" style="border-redios:10px" /> <!-- Replace with the actual logo URL -->
+<img src="./public/favicon.ico" style="border-redios:10px; max-width:400px"  /> 
 
 ## Overview
 
