@@ -64,4 +64,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
+Linkdin: <a href="https://www.linkedin.com/in/mahmoud-anani">Mahmoud Anani</a>.
+<br/>
 For any inquiries or support, please contact [mahmoud18957321@gmail.com].
