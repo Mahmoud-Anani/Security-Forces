@@ -27,7 +27,7 @@ function Sidebar() {
 
   return (
     <div
-      className={`sm:hidden block z-20 absolute top-0 left-0 bg-[#000000e3] h-full shadow-md duration-500`}
+      className={`sm:hidden block z-20 absolute  top-0 left-0 text-white bg-[#000000e3] h-full shadow-md duration-500`}
       style={{
         width: sidebar ? "100%" : "0",
         // display: sidebar ? "block" : "none",
