@@ -14,7 +14,6 @@ import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
 import Navbar from "./components/layout/Navbar";
 import { RecoilRoot } from "recoil";
-import WhatsNameSSF from "./components/layout/WhatsNameSSF";
 import Sidebar from "./components/layout/sidebar";
 
 export const links: Route.LinksFunction = () => [
@@ -47,7 +46,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <RecoilRoot>
           <Navbar />
           <Sidebar />
-          <WhatsNameSSF />
+          
           {children}
           <ScrollRestoration />
           <Scripts />

@@ -9,6 +9,7 @@ import {
 } from "~/stores/seniorDate";
 import logo from "~/../public/favicon.ico";
 import { linksApp } from "~/stores/mainData";
+import WhatsNameSSF from "./whatsNameSSF";
 const Navbar: React.FC = () => {
   const [nameSSF, setNameSSF] = useRecoilState(nameSSFState);
   const [darkMode, setDarkMode] = useRecoilState(isDarkModeState);
@@ -34,6 +35,7 @@ const Navbar: React.FC = () => {
         darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
       } shadow-md`}
     >
+      <WhatsNameSSF />
       <div className="container mx-auto flex justify-between items-center relative">
         <Link to={"/"} className={`flex items-center gap-2`}>
           <img src={logo} alt="logo" className="w-14 h-14 rounded-full" />
