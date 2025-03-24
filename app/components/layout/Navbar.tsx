@@ -10,6 +10,7 @@ import {
 import logo from "~/../public/favicon.ico";
 import { linksApp } from "~/stores/mainData";
 import WhatsNameSSF from "./whatsNameSSF";
+import { ToastContainer } from "react-toastify";
 const Navbar: React.FC = () => {
   const [nameSSF, setNameSSF] = useRecoilState(nameSSFState);
   const [darkMode, setDarkMode] = useRecoilState(isDarkModeState);
@@ -27,6 +28,19 @@ const Navbar: React.FC = () => {
       setDarkMode(true);
       document.body.classList.add("dark");
     }
+
+
+    // change mode by keyboard shortcut
+     const handleKeyDown = (event: KeyboardEvent) => {
+       if (event.ctrlKey && event.key.toLowerCase() === "m") {
+         event.preventDefault(); // Prevent default behavior
+         setDarkMode((prev) => !prev);
+         document.body.classList.toggle("dark");
+       }
+     };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   return (
@@ -35,6 +49,7 @@ const Navbar: React.FC = () => {
         darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
       } shadow-md`}
     >
+      <ToastContainer />
       <WhatsNameSSF />
       <div className="container mx-auto flex justify-between items-center relative">
         <Link to={"/"} className={`flex items-center gap-2`}>

@@ -1,3 +1,4 @@
+import ExcelReader from "~/components/excel/ExcelReader";
 import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
@@ -11,5 +12,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <>home</>;
+  return (
+    <>
+      <ExcelReader />
+    </>
+  );
 }
