@@ -39,7 +39,7 @@ The application of recruits affairs for the Ministry of Interior aims to develop
    ```bash
    npm start
    ```
-2. Access the application at `http://localhost:3000`.
+2. Access the application at `http://localhost:5173`.
 
 ## Contributing
 
@@ -64,4 +64,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-For any inquiries or support, please contact [your-email@example.com].
+For any inquiries or support, please contact [mahmoud18957321@gmail.com].
