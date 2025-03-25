@@ -17,6 +17,8 @@ import Navbar from "./components/layout/Navbar";
 import { RecoilRoot } from "recoil";
 import Sidebar from "./components/layout/sidebar";
 
+import { StyledEngineProvider, CssBaseline } from "@mui/material";
+
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
@@ -34,17 +36,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        />
-
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
@@ -56,12 +47,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <RecoilRoot>
-          <Navbar />
-          <Sidebar />
+          <StyledEngineProvider injectFirst>
+            <CssBaseline />
+            <Navbar />
+            <Sidebar />
 
-          {children}
-          <ScrollRestoration />
-          <Scripts />
+            {children}
+            <ScrollRestoration />
+            <Scripts />
+          </StyledEngineProvider>
         </RecoilRoot>
       </body>
     </html>

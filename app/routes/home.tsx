@@ -1,5 +1,6 @@
 import ExcelReader from "~/components/excel/ExcelReader";
 import type { Route } from "./+types/home";
+import { Button } from "@mui/material";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -14,6 +15,13 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <>
+      <Button variant="contained">Contained</Button>
+      <Button variant="contained" disabled>
+        Disabled
+      </Button>
+      <Button variant="contained" href="#contained-buttons">
+        Link
+      </Button>
       <ExcelReader />
     </>
   );
