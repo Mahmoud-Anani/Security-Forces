@@ -22,7 +22,7 @@ export default function Home() {
       <Button variant="contained" href="#contained-buttons">
         Link
       </Button>
-      <ExcelReader />
+      {/* <ExcelReader /> */}
     </>
   );
 }
