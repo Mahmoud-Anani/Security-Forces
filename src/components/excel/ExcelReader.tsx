@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import * as ExcelJS from "exceljs";
 import ViewDataExcel from "./ViewDataExcel";
 import { toast } from "react-toastify";
-
+import dragDropGif from "./../../../public/dragDrop.gif";
 function CheckFileExtension(event: React.DragEvent<HTMLDivElement>) {
   //   log extention file
-  const extention = event.dataTransfer.files?.[0].name.split(".").pop()||"";
+  const extention = event.dataTransfer.files?.[0].name.split(".").pop() || "";
   if (!["xlsx", "xls"].includes(extention)) {
     toast.error("الملف غير مدعوم");
     return false;
@@ -34,7 +34,6 @@ const ExcelReader: React.FC = () => {
         sheetData.push(rowData);
       });
 
-      console.log("Parsed Data:", sheetData);
       setData(sheetData);
     };
   };
@@ -42,7 +41,7 @@ const ExcelReader: React.FC = () => {
   const handleFileInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const extention = event.target.files?.[0].name.split(".").pop()||"";
+    const extention = event.target.files?.[0].name.split(".").pop() || "";
     if (!["xlsx", "xls"].includes(extention)) {
       toast.error("الملف غير مدعوم");
       return false;
@@ -57,20 +56,41 @@ const ExcelReader: React.FC = () => {
       return;
     }
     const file = event.dataTransfer.files?.[0];
-    
+
     if (file) handleFileUpload(file);
   };
 
+  const [dragple, setDragple] = useState(false);
+
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
+    setDragple(true);
   };
-
   return (
-    <div
-      onDrop={handleDrop}
-      onDragOver={handleDragOver}
-      className="h-[100vh] w-[100%]"
-    >
+    <>
+      {data.length === 0 && (
+        <div
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          onDragLeave={() => setDragple(false)}
+          className={`duration-200 border-${
+            dragple ? "solid" : "dashed"
+          } h-[80vh] w-[90%] mx-auto mt-5 rounded-2xl border-${
+            dragple ? "red-400" : "gray-400"
+          } ${dragple ? "border-8" : "border-2 "} p-5 relative overflow-hidden`}
+        >
+          <div className="flex justify-between items-center -z-10 absolute top-[50%] left-[50%]  -translate-[50%]">
+            <img src={dragDropGif} className={`rounded-4xl object-cover`} />
+          </div>
+
+          <input
+            className={`${data.length > 0 ? "" : "opacity-0 w-full h-full"}`}
+            type="file"
+            accept=".xlsx, .xls"
+            onChange={handleFileInputChange}
+          />
+        </div>
+      )}
       <input
         className={`${data.length > 0 ? "" : "opacity-0 w-full h-full"}`}
         type="file"
@@ -78,7 +98,7 @@ const ExcelReader: React.FC = () => {
         onChange={handleFileInputChange}
       />
       {data.length > 0 && <ViewDataExcel data={data} />}
-    </div>
+    </>
   );
 };
 
