@@ -1,35 +1,35 @@
 import { useState } from "react";
-import type { Route } from "./+types/home";
-import CrLevel from "~/components/seniorDate/cr-level";
-import StartDate from "~/components/seniorDate/startDate";
-import RedifType from "~/components/seniorDate/RedifType";
+// import type { Route } from "./+types/home";
+import CrLevel from "../components/seniorDate/cr-level";
+import StartDate from "../components/seniorDate/startDate";
+import RedifType from "../components/seniorDate/RedifType";
 import { useRef } from "react";
-import BtnSubmit from "~/components/btnForm";
-import SubError from "~/components/seniorDate/subError";
-import RedifTypePush from "~/components/seniorDate/RedifType-push";
-import { isDarkModeState, SeniorDataErrors } from "~/stores/seniorDate";
+import BtnSubmit from "../components/btnForm";
+import SubError from "../components/seniorDate/subError";
+import RedifTypePush from "../components/seniorDate/RedifType-push";
+import { isDarkModeState, SeniorDataErrors } from "../stores/seniorDate";
 import { useRecoilState } from "recoil";
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "حــسـاب تــاريــخ تــســريــح الـمـجـنـد" },
-    {
-      name: "description",
-      content:
-        "Welcome to new project malitere services this sub project using to calc Senior Date",
-    },
-  ];
-}
+// export function meta({}: Route.MetaArgs) {
+//   return [
+//     { title: "حــسـاب تــاريــخ تــســريــح الـمـجـنـد" },
+//     {
+//       name: "description",
+//       content:
+//         "Welcome to new project malitere services this sub project using to calc Senior Date",
+//     },
+//   ];
+// }
 function DataView({
   index,
   component,
   className,
   error,
 }: {
-  index: Number;
+  index: number;
   component: any;
   className?: string;
-  error: { index: Number; message: string };
+  error: { index: number; message: string };
 }) {
   return (
     <>
@@ -54,7 +54,7 @@ export default function SeniorDate() {
   const [pindingState, setPindingState] = useState<boolean>(false);
   const [seniorDate, setSeniorDate] = useState("");
 
-  const [darkMode, setDarkMode] = useRecoilState(isDarkModeState);
+  const [darkMode] = useRecoilState(isDarkModeState);
 
   async function handleFormSubmit(formData: any) {
     setPindingState(true);

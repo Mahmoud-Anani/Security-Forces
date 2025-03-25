@@ -1,24 +1,25 @@
 "use client";
 import { useEffect } from "react";
-import { Link } from "react-router";
 import { useRecoilState } from "recoil";
 import {
   isDarkModeState,
   nameSSFState,
   sidebarState,
-} from "~/stores/seniorDate";
-import logo from "~/../public/favicon.ico";
-import { linksApp } from "~/stores/mainData";
+} from "../../stores/seniorDate";
+import logo from "../../../public/favicon.ico";
+import { linksApp } from "../../stores/mainData";
 import WhatsNameSSF from "./whatsNameSSF";
 import { ToastContainer } from "react-toastify";
+
+import { NavLink } from "react-router"; // Correct import for NavLink
 const Navbar: React.FC = () => {
-  const [nameSSF, setNameSSF] = useRecoilState(nameSSFState);
+  const [nameSSF] = useRecoilState(nameSSFState);
   const [darkMode, setDarkMode] = useRecoilState(isDarkModeState);
   const [, setSidebar] = useRecoilState(sidebarState);
-
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.body.classList.toggle("dark");
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     window && localStorage.setItem("mode", !darkMode ? "dark" : "light");
   };
 
@@ -29,18 +30,24 @@ const Navbar: React.FC = () => {
       document.body.classList.add("dark");
     }
 
-
     // change mode by keyboard shortcut
-     const handleKeyDown = (event: KeyboardEvent) => {
-       if (event.ctrlKey && event.key.toLowerCase() === "m") {
-         event.preventDefault(); // Prevent default behavior
-         setDarkMode((prev) => !prev);
-         document.body.classList.toggle("dark");
-       }
-     };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.key.toLowerCase() === "m") {
+        event.preventDefault(); // Prevent default behavior
+        setDarkMode((prev) => !prev);
+        document.body.classList.toggle("dark");
+        console.log("click");
+
+        localStorage.setItem(
+          "mode",
+          localStorage.getItem("mode") === "dark" ? "light" : "dark"
+        );
+      }
+    };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -52,7 +59,7 @@ const Navbar: React.FC = () => {
       <ToastContainer />
       <WhatsNameSSF />
       <div className="container mx-auto flex justify-between items-center relative">
-        <Link to={"/"} className={`flex items-center gap-2`}>
+        <NavLink to="/" className={`flex items-center gap-2`}>
           <img src={logo} alt="logo" className="w-14 h-14 rounded-full" />
           <h1 className="text-xl aref-ruqaa-bold">
             قوات أمن{" "}
@@ -62,17 +69,17 @@ const Navbar: React.FC = () => {
                 : ""}
             </span>
           </h1>
-        </Link>
+        </NavLink>
         {/* Links */}
         <ul className="hidden sm:flex gap-4 absolute left-[50%] -translate-x-[50%]">
           {linksApp.map((link, index) => (
             <li key={index}>
-              <Link
-                to={link.link}
+              <NavLink
+                to={link.link} // Ensure valid paths in linksApp
                 className={`hover:text-[#5f2323] hover:underline duration-200`}
               >
                 {link.name}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>

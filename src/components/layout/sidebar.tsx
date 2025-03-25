@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router";
 import { useRecoilState } from "recoil";
-import { linksApp } from "~/stores/mainData";
-import { sidebarState } from "~/stores/seniorDate";
+import { linksApp } from "../../stores/mainData";
+import { sidebarState } from "../../stores/seniorDate";
 
 function Sidebar() {
   const [sidebar, setSidebar] = useRecoilState(sidebarState);

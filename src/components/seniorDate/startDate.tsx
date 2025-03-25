@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import DatePicker from "react-date-picker";
+import DatePicker from "react-datepicker";
+
 import { useRecoilState } from "recoil";
-import { SeniorDataErrors } from "~/stores/seniorDate";
+import { SeniorDataErrors } from "../../stores/seniorDate";
 
 type ValuePiece = Date | null;
 
@@ -33,7 +34,7 @@ function StartDate() {
       document.head.appendChild(style);
     }
   }, []);
-  const [error, setErorr] = useRecoilState(SeniorDataErrors);
+  const [, setErorr] = useRecoilState(SeniorDataErrors);
 
   return (
     <label
@@ -41,20 +42,18 @@ function StartDate() {
       className={`cursor-pointer border p-2 rounded-2xl bg-[#00000000] hover:bg-[#673ab708]`}
       htmlFor="date-of-start"
     >
-      {/* <span className="mx-2">تاريخ التجنيد:</span> */}
+      <span className="mx-2">تاريخ التجنيد:</span>
       <DatePicker
-        onClick={() => setErorr({ index: -1, message: "" })}
-        format="yyyy"
-        closeCalendar={false}
+        onCalendarOpen={() => setErorr({ index: -1, message: "" })}
+        dateFormat="yyyy" // Format to display only the year
         locale="ar-EG"
-        isOpen={false}
-        maxDetail="decade"
+        showYearPicker // Enables year picker mode
         onChange={onChange}
-        value={value}
+        selected={value as Date} // Ensure proper type for selected value
         name="startDate"
         id="date-of-start"
         className={`border-0 outline-0 w-full`}
-        maxDate={maxDate}
+        maxDate={maxDate} // Restrict selection to the current year or earlier
       />
     </label>
   );

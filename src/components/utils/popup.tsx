@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import logo from "~/../public/favicon.ico";
-import { listSSFs } from "~/stores/mainData";
+import React, { useEffect } from "react";
+import logo from "../../../public/favicon.ico";
+import { listSSFs } from "../../stores/mainData";
 
 interface PopupProps {
   isVisible: boolean;
@@ -26,6 +26,7 @@ const Popup: React.FC<PopupProps> = ({
     onClose();
   };
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     document.body.style.maxHeight = "100vh";
     document.body.style.overflow = "hidden";

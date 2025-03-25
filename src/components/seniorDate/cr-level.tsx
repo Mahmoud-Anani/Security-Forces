@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-import { SeniorDataErrors } from "~/stores/seniorDate";
+import { SeniorDataErrors } from "../../stores/seniorDate";
 
 function CrLevel() {
   const [cr, setCR] = useState<String | null>("");

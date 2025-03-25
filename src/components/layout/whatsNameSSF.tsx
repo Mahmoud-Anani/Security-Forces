@@ -1,11 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
-import {
-  isPopupVisibleState,
-  nameSSFState,
-} from "~/stores/seniorDate";
+import { isPopupVisibleState, nameSSFState } from "../../stores/seniorDate";
 import Popup from "../utils/popup";
-import { listSSFs } from "~/stores/mainData";
+import { listSSFs } from "../../stores/mainData";
 
 function WhatsNameSSF() {
   const [nameSSF, setNameSSF] = useRecoilState(nameSSFState);

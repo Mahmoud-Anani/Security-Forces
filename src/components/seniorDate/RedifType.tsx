@@ -1,6 +1,6 @@
 import { memo, useState } from "react";
 import { useRecoilState } from "recoil";
-import { SeniorDataErrors } from "~/stores/seniorDate";
+import { SeniorDataErrors } from "../../stores/seniorDate";
 
 export const globalStyleInputs = `cursor-pointer font-extrabold px-[5px] py-[2px] rounded-[5px] hover:text-blue-500 duration-200 w-[70px] text-center h-fit`;
 export const singleGlobalStyleInputs = `text-white bg-[#cc6963] hover:!text-[#ffffffc4]`;

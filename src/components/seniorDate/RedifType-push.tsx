@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-import { SeniorDataErrors } from "~/stores/seniorDate";
+import { SeniorDataErrors } from "../../stores/seniorDate";
 import { globalStyleInputs, singleGlobalStyleInputs } from "./RedifType";
 
 function RedifTypePush() {
