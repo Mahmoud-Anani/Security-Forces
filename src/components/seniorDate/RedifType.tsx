@@ -7,7 +7,7 @@ export const singleGlobalStyleInputs = `text-white bg-[#cc6963] hover:!text-[#ff
 
 function RedifType() {
   const [redifType, setRedifType] = useState("");
-  const [error, setErorr] = useRecoilState(SeniorDataErrors);
+  const [, setErorr] = useRecoilState(SeniorDataErrors);
 
   return (
     <div className={`flex justify-between gap-1`}>

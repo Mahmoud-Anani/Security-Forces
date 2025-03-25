@@ -6,7 +6,7 @@ export default function BtnSubmit({
 }: {
   buttonText: string;
   classes: string;
-  nativeStyls: {};
+  nativeStyls: object;
   pending: boolean;
 }) {
   return (

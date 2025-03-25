@@ -3,8 +3,8 @@ import { useRecoilState } from "recoil";
 import { SeniorDataErrors } from "../../stores/seniorDate";
 
 function CrLevel() {
-  const [cr, setCR] = useState<String | null>("");
-  const [error, setErorr] = useRecoilState(SeniorDataErrors);
+  const [cr, setCR] = useState<string | null>("");
+  const [, setErorr] = useRecoilState(SeniorDataErrors);
 
   return (
     <label

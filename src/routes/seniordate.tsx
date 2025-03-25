@@ -50,8 +50,12 @@ const componentsInputs = [
 export default function SeniorDate() {
   const ref = useRef(null);
 
-  const [error, setErorr] = useRecoilState(SeniorDataErrors);
+  const [, setErorr] = useRecoilState(SeniorDataErrors);
   const [pindingState, setPindingState] = useState<boolean>(false);
+  const [error, ] = useState<{ index: number; message: string }>({
+    index: -1,
+    message: "",
+  });
   const [seniorDate, setSeniorDate] = useState("");
 
   const [darkMode] = useRecoilState(isDarkModeState);

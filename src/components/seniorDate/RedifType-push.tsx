@@ -5,7 +5,7 @@ import { globalStyleInputs, singleGlobalStyleInputs } from "./RedifType";
 
 function RedifTypePush() {
   const [redifTypePush, setRedifTypePush] = useState("");
-  const [error, setErorr] = useRecoilState(SeniorDataErrors);
+  const [, setErorr] = useRecoilState(SeniorDataErrors);
 
   return (
     <div className={`flex justify-between `}>
