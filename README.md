@@ -1,6 +1,6 @@
 # Security Forces Project Documentation
 
-<img src="./public/favicon.ico" style="border-redios:10px; max-width:400px"  /> 
+<img src="./public/favicon.ico" style="border-redios:10px; max-width:250px"  /> 
 
 ## Overview
 
