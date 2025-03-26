@@ -7,7 +7,6 @@ const paginationModel = { page: 0, pageSize: 5 };
 function ViewDataExcel({ data }: any) {
   const [columns, setColums] = useState<GridColDef[]>([]);
   const [rows, setRows] = useState<any[]>([]);
-  console.log(data);
 
   useEffect(() => {
     if (data.length > 0) {
@@ -30,7 +29,7 @@ function ViewDataExcel({ data }: any) {
   }, [data]);
   return (
     <>
-      <Paper sx={{ height: 400, width: "100%", direction:"rtl" }}>
+      <Paper sx={{ height: 400, width: "100%", direction: "rtl" }}>
         <DataGrid
           className={`text-right`}
           rows={rows}

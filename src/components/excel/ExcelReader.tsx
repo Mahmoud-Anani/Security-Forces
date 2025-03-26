@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as ExcelJS from "exceljs";
 import ViewDataExcel from "./ViewDataExcel";
 import { toast } from "react-toastify";
 import dragDropGif from "./../../../public/dragDrop.gif";
+import {
+  enterPasswordAppState,
+  workbookDataState,
+} from "../../stores/seniorDate";
+import { useRecoilState } from "recoil";
+import Cookies from "js-cookie";
+
 function CheckFileExtension(event: React.DragEvent<HTMLDivElement>) {
   //   log extention file
   const extention = event.dataTransfer.files?.[0].name.split(".").pop() || "";
@@ -14,8 +21,29 @@ function CheckFileExtension(event: React.DragEvent<HTMLDivElement>) {
 }
 
 const ExcelReader: React.FC = () => {
-  const [data, setData] = useState<any[][]>([]);
+  // @ts-ignore
+  const [data, setData] = useRecoilState<any[][] | [null]>(workbookDataState);
+  const [, setEnterPasswordApp] = useRecoilState<boolean>(
+    enterPasswordAppState
+  );
 
+  useEffect(() => {
+    const data = localStorage.getItem("workbookData") || [];
+    if (data.length > 0) {
+      // @ts-ignore
+      setData(JSON.parse(data));
+      // Cookies.set("auth", "true", { expires: 0.25 });
+      const auth = Cookies.get("auth") || "";
+      if (auth === "true") {
+        setEnterPasswordApp(false);
+        return;
+      }
+      setEnterPasswordApp(true);
+    } else {
+      setData(JSON.parse(JSON.stringify(data)));
+      setEnterPasswordApp(false);
+    }
+  }, []);
   const handleFileUpload = async (file: File) => {
     const reader = new FileReader();
     reader.readAsArrayBuffer(file);
@@ -33,7 +61,7 @@ const ExcelReader: React.FC = () => {
         const rowData = row.values.slice(1);
         sheetData.push(rowData);
       });
-
+      localStorage.setItem("workbookData", JSON.stringify(sheetData));
       setData(sheetData);
     };
   };

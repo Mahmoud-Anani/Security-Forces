@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import { isPopupVisibleState, nameSSFState } from "../../stores/seniorDate";
 import Popup from "../utils/popup";
 import { listSSFs } from "../../stores/mainData";
+import { toast } from "react-toastify";
 
 function WhatsNameSSF() {
   const [nameSSF, setNameSSF] = useRecoilState(nameSSFState);
@@ -55,7 +56,7 @@ function WhatsNameSSF() {
         title="مَرْحَبًا بِكَ فِي نِظَامِ إِدَارَةِ قُوَّاتِ الأَمْنِ"
         content={
           <form
-            className="flex flex-col gap-4"
+            className="flex flex-col gap-4 max-w-md mx-auto"
             onSubmit={(e) => e.preventDefault()}
           >
             <label htmlFor="nameSSF">
@@ -81,7 +82,13 @@ function WhatsNameSSF() {
             </span>
           </form>
         }
-        onClose={() => setPopupVisible(false)}
+        onClose={() => {
+          if (!listSSFs.includes(nameSSF)) {
+            toast.error("يجب اختيار اسم قوات الامن");
+            return;
+          }
+          setPopupVisible(false);
+        }}
         value={nameSSF}
       />
     </>

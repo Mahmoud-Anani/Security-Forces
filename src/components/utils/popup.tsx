@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import logo from "../../../public/favicon.ico";
-import { listSSFs } from "../../stores/mainData";
 
 interface PopupProps {
   isVisible: boolean;
@@ -14,15 +13,11 @@ const Popup: React.FC<PopupProps> = ({
   isVisible,
   title,
   content,
-  value,
   onClose,
 }) => {
   if (!isVisible) return null;
 
   const OnCloseButNotAddSSF = () => {
-    if (!listSSFs.includes(value)) {
-      return;
-    }
     onClose();
   };
 
@@ -34,7 +29,7 @@ const Popup: React.FC<PopupProps> = ({
 
   return (
     <>
-      <div className="bg-white rounded-4xl text-black aref-ruqaa-bold text-3xl z-10 absolute transform translate-x-[-50%] left-[50%] top-[10%]">
+      <div className="bg-white rounded-4xl text-black aref-ruqaa-bold text-3xl z-[999] absolute transform translate-x-[-50%] left-[50%] top-[10%]">
         <button
           onClick={OnCloseButNotAddSSF}
           className="sm:block hidden cursor-pointer relative left-[15%] bottom-[10%] text-xl mt-2"
@@ -50,7 +45,7 @@ const Popup: React.FC<PopupProps> = ({
         </div>
       </div>
       <div
-        className={`h-[100vh] w-[100%] absolute top-0 left-0 z-[1] opacity-60 bg-black`}
+        className={`h-[100vh] w-[100%] absolute top-0 left-0 z-[99] opacity-60 bg-black`}
         onClick={OnCloseButNotAddSSF}
       ></div>
     </>

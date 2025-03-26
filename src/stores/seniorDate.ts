@@ -20,8 +20,13 @@ export const isDarkModeState = atom({
   key: "isDarkModeState",
   default: false,
 });
+export const workbookDataState = atom({
+  key: "workbookDataState",
+  default: [],
+});
+export const enterPasswordAppState = atom({
+  key: "enterPasswordAppState",
+  default: false,
+});
 
-
-
-
-export { nameSSFState,  SeniorDataErrors, sidebarState };
+export { nameSSFState, SeniorDataErrors, sidebarState };
