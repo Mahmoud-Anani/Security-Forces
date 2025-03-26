@@ -29,7 +29,7 @@ const Popup: React.FC<PopupProps> = ({
 
   return (
     <>
-      <div className="bg-white rounded-4xl text-black aref-ruqaa-bold text-3xl z-[999] w-[90%] absolute transform translate-x-[-50%] left-[50%] top-[10%]">
+      <div className="bg-white rounded-4xl text-black aref-ruqaa-bold text-3xl z-[999] max-w-[500px] w-[90%] absolute transform translate-x-[-50%] left-[50%] top-[10%]">
         <button
           onClick={OnCloseButNotAddSSF}
           className="sm:block hidden cursor-pointer relative left-[15%] bottom-[10%] text-xl mt-2"
