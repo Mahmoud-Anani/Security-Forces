@@ -79,18 +79,15 @@ function ViewDataExcel({ data }: any) {
       >
         <DataGrid
           className="text-right ms-5"
-          style={{ width:"290.6pc" }}
+          style={{ width: "290.6pc" }}
           rows={rows}
           columns={columns}
           initialState={{ pagination: { paginationModel } }}
           pageSizeOptions={[5, 10]}
           checkboxSelection
-          columnVisibilityModel={undefined} // Ensure all columns are visible
+          columnVisibilityModel={undefined}
           sx={{
             border: 0,
-            "& .MuiDataGrid-virtualScroller": {
-              overflowX: "auto",
-            },
           }}
         />
       </Paper>
