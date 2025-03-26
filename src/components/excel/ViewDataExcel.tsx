@@ -75,7 +75,7 @@ function ViewDataExcel({ data }: any) {
   return (
     <>
       <Paper
-        sx={{ height: 800, width: "100%", direction: "rtl", overflowX: "auto" }}
+        sx={{ height: 800, width: "100%", overflowX: "auto" }}
       >
         <DataGrid
           className="text-right ms-5"
