@@ -13,6 +13,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import CrLevelAnalysis from "../components/analysis/crLevelAnalysis";
 ChartJS.register(
   LineElement,
   PointElement,
@@ -30,15 +31,101 @@ ChartJS.register(
 function DBAnalysis() {
   const [rows] = useRecoilState(rowsDataState);
   const [startAllDatesState, setstartAllDatesState] = useState<string[]>([]);
-  const [anlysisData, setAnlysisData] = useState<{ camingOfYears: any }>({
+  const [anlysisData, setAnlysisData] = useState<{
+    camingOfYears: any;
+    crLevel: {
+      high: number;
+      medium: number;
+      upperAverage: number;
+      usually: number;
+    };
+    unShadbCrLevel: {
+      high: number;
+      medium: number;
+      upperAverage: number;
+      usually: number;
+    };
+  }>({
     camingOfYears: {},
+    crLevel: {
+      high: 0,
+      medium: 0,
+      upperAverage: 0,
+      usually: 0,
+    },
+    unShadbCrLevel: {
+      high: 0,
+      medium: 0,
+      upperAverage: 0,
+      usually: 0,
+    },
   });
 
   useEffect(() => {
     if (rows.length > 0) {
       const yearsSet = new Set<string>(); // استخدام Set لتجنب التكرار
+      const crLevel = { high: 0, medium: 0, upperAverage: 0, usually: 0 };
+      const unShadbCrLevel = {
+        high: 0,
+        medium: 0,
+        upperAverage: 0,
+        usually: 0,
+      };
       rows.slice(1).forEach((row: any) => {
         Object.entries(row).forEach(([key, value]) => {
+          if (`${key}`.toString().trim().toLowerCase() === "5") {
+            switch (value) {
+              case "عليا":
+                crLevel.high += 1;
+                break;
+              case "متوسط":
+                crLevel.medium += 1;
+                break;
+              case "فوق متوسط":
+                crLevel.upperAverage += 1;
+                break;
+              case "عادة":
+                crLevel.usually += 1;
+                break;
+
+              default:
+                break;
+            }
+            setAnlysisData((prive) => ({
+              ...prive,
+              crLevel,
+            }));
+          }
+          // بدون الشطب
+          if (
+            `${key}`.toString().trim().toLowerCase() === "5" &&
+            !row[2].includes("شطب")
+          ) {
+            console.log(row[2]);
+
+            switch (value) {
+              case "عليا":
+                unShadbCrLevel.high += 1;
+                break;
+              case "متوسط":
+                unShadbCrLevel.medium += 1;
+                break;
+              case "فوق متوسط":
+                unShadbCrLevel.upperAverage += 1;
+                break;
+              case "عادة":
+                unShadbCrLevel.usually += 1;
+                break;
+
+              default:
+                break;
+            }
+            setAnlysisData((prive) => ({
+              ...prive,
+              unShadbCrLevel,
+            }));
+          }
+
           if (
             `${key}`.toString().trim().toLowerCase() === "4" &&
             `${value}`.toString().trim().split("/").length === 3
@@ -68,10 +155,10 @@ function DBAnalysis() {
       camingOfYears: handleDataCountYears,
     }));
   }, [startAllDatesState, rows]);
+  console.log("anlysisData", anlysisData);
 
-  // تحويل الكائن إلى مصفوفات لاستخدامها في الرسم البياني
-  const labels = Object.keys(anlysisData.camingOfYears); // السنوات
-  const dataValues = Object.values(anlysisData.camingOfYears); // عدد الأشخاص
+  const labels = Object.keys(anlysisData.camingOfYears);
+  const dataValues = Object.values(anlysisData.camingOfYears);
 
   const chartData = {
     labels,
@@ -79,8 +166,8 @@ function DBAnalysis() {
       {
         label: "عدد المجندين",
         data: dataValues,
-        borderColor: "rgba(75, 192, 192, 1)", // لون الخط
-        backgroundColor: "rgba(75, 192, 192, 0.2)", // لون التعبئة
+        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
         borderWidth: 2,
         pointRadius: 3,
       },
@@ -99,9 +186,26 @@ function DBAnalysis() {
       },
     },
   };
+
   return (
-    <div className={`mw-[90%]`}>
-      <Line data={chartData} options={options} />
+    <div className={`container mx-auto`}>
+      <div className={`flex justify-between flex-wrap gap-5`}>
+        <CrLevelAnalysis
+          title="مجند مع الشطب"
+          high={anlysisData.crLevel.high}
+          medium={anlysisData.crLevel.medium}
+          upperAverage={anlysisData.crLevel.upperAverage}
+          usually={anlysisData.crLevel.usually}
+        />
+        <CrLevelAnalysis
+          title="مجند بدون الشطب"
+          high={anlysisData.unShadbCrLevel.high}
+          medium={anlysisData.unShadbCrLevel.medium}
+          upperAverage={anlysisData.unShadbCrLevel.upperAverage}
+          usually={anlysisData.unShadbCrLevel.usually}
+        />
+      </div>
+      <Line data={chartData} options={options} className={` `} />
     </div>
   );
 }
