@@ -105,7 +105,7 @@ const ExcelReader: React.FC = () => {
             dragple ? "solid" : "dashed"
           } h-[80vh] w-[90%] mx-auto mt-5 rounded-2xl border-${
             dragple ? "red-400" : "gray-400"
-          } ${dragple ? "border-8" : "border-2 "} p-5 relative overflow-hidden`}
+          } ${dragple ? "border-8" : "border-2 "} p-5 relative overflow-hidden sm:max-h-auto max-h-[80vh] `}
         >
           <div className="flex justify-between items-center -z-10 absolute top-[50%] left-[50%]  -translate-[50%]">
             <img src={dragDropGif} className={`rounded-4xl object-cover`} />
