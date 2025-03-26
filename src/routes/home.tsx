@@ -48,7 +48,7 @@ function Home() {
   );
   useEffect(() => {}, [enterPasswordApp]);
   return (
-    <>
+    <div className={`container mx-auto`}>
       <Helmet>
         <title>تطبيق شؤون المجندين لوزارة الداخلية</title>
         <meta
@@ -94,7 +94,7 @@ function Home() {
           toast.error("يجب ادخال كلمة المرور للدخول");
         }}
       />
-    </>
+    </div>
   );
 }
 

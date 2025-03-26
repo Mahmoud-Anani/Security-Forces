@@ -5,26 +5,61 @@ import { useEffect, useState } from "react";
 
 const paginationModel = { page: 0, pageSize: 5 };
 function ViewDataExcel({ data }: any) {
-  const [columns, setColums] = useState<GridColDef[]>([]);
+  const [columns, setColumns] = useState<GridColDef[]>([]);
   const [rows, setRows] = useState<any[]>([]);
+  console.log(data);
 
   useEffect(() => {
     if (data.length > 0) {
-      const keys = Object.keys(data[0]);
+      const keys = Object.keys(data[0] || {});
+
       const columnsData: GridColDef[] = keys.map((key, index) => ({
         field: key,
-        headerName: data[0][index],
+        headerName: data[0]?.[index] || key,
         width: 200,
+        renderCell: (params) => {
+          return (
+            <span
+              className="text-xl "
+              style={{
+                textAlign: "center",
+                color: !`${params.value}`.includes("لا يوجد") ? "black" : "red",
+                fontWeight: "bold",
+              }}
+            >
+              {params.value}
+            </span>
+          );
+        },
       }));
 
-      setColums(columnsData);
+      setColumns(columnsData);
 
-      const rows = data.slice(1).map((row: any, index: number) => ({
-        id: index,
-        ...row,
-      }));
+      const formattedRows = data.slice(1).map((row: any, index: number) => {
+        const formattedRow = Object.fromEntries(
+          Object.entries(row).map(([key, value], colIndex) => {
+            if (!value) {
+              return [
+                key,
+                `لا يوجد ${columnsData[colIndex]?.headerName || "بيانات"}`,
+              ];
+            }
 
-      setRows(rows);
+            if (typeof value === "string" && value.includes("000Z")) {
+              return [key, new Date(value).toLocaleDateString("ar-EG")];
+            }
+
+            return [key, value];
+          })
+        );
+
+        return {
+          id: index,
+          ...formattedRow,
+        };
+      });
+
+      setRows(formattedRows);
     }
   }, [data]);
   return (

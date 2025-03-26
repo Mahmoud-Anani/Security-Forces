@@ -95,7 +95,7 @@ const ExcelReader: React.FC = () => {
     setDragple(true);
   };
   return (
-    <>
+    <div className={`px-2 sm:px-0`}>
       {data.length === 0 && (
         <div
           onDrop={handleDrop}
@@ -103,11 +103,11 @@ const ExcelReader: React.FC = () => {
           onDragLeave={() => setDragple(false)}
           className={`duration-200 border-${
             dragple ? "solid" : "dashed"
-          } h-[80vh] w-[90%] mx-auto mt-5 rounded-2xl border-${
+          } sm:h-[80vh] h-[60vh] mx-auto mt-5 rounded-2xl border-${
             dragple ? "red-400" : "gray-400"
-          } ${dragple ? "border-8" : "border-2 "} p-5 relative overflow-hidden sm:max-h-auto max-h-[80vh] `}
+          } ${dragple ? "border-8" : "border-2 "} p-5 relative overflow-hidden`}
         >
-          <div className="flex justify-between items-center -z-10 absolute top-[50%] left-[50%]  -translate-[50%]">
+          <div className="flex justify-between items-center -z-10 absolute top-[50%] left-[50%] -translate-[50%]">
             <img src={dragDropGif} className={`rounded-4xl object-cover`} />
           </div>
 
@@ -126,7 +126,7 @@ const ExcelReader: React.FC = () => {
         onChange={handleFileInputChange}
       />
       {data.length > 0 && <ViewDataExcel data={data} />}
-    </>
+    </div>
   );
 };
 

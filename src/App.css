@@ -1,0 +1,8 @@
+.MuiDataGrid-cell--textLeft {
+    text-align: start !important;
+}
+
+.MuiDataGrid-columnHeaderTitleContainer{
+    text-align: center !important;
+    font-size: x-large;
+}

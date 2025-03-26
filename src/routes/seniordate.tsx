@@ -52,7 +52,7 @@ export default function SeniorDate() {
 
   const [, setErorr] = useRecoilState(SeniorDataErrors);
   const [pindingState, setPindingState] = useState<boolean>(false);
-  const [error, ] = useState<{ index: number; message: string }>({
+  const [error] = useState<{ index: number; message: string }>({
     index: -1,
     message: "",
   });
@@ -271,7 +271,7 @@ export default function SeniorDate() {
 
   return (
     <>
-      <div className={`flex justify-center mt-16 `}>
+      <div className={`flex justify-center mt-16 container mx-auto`}>
         <form
           ref={ref}
           // action={handleFormSubmit}

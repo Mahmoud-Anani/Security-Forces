@@ -52,13 +52,13 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`p-4 ${
+      className={`py-2 ${
         darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
       } shadow-md`}
     >
       <ToastContainer />
       <WhatsNameSSF />
-      <div className="container mx-auto flex justify-between items-center relative">
+      <div className="container mx-auto sm:px-0 px-2 flex justify-between items-center relative">
         <NavLink to="/" className={`flex items-center gap-2`}>
           <img src={logo} alt="logo" className="w-14 h-14 rounded-full" />
           <h1 className="text-xl aref-ruqaa-bold">
