@@ -7,6 +7,9 @@ export default defineConfig({
     tailwindcss(),
     react(),
     VitePWA({
+      workbox: {
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024, // Set limit to 4 MiB
+      },
       registerType: "autoUpdate",
       manifest: {
         name: "My PWA App",
