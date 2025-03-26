@@ -6,6 +6,7 @@ import Popup from "../components/utils/popup";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import DBAnalysis from "./dBAnalysis";
 
 function Home() {
   const [enterPasswordApp, setEnterPasswordApp] = useRecoilState<boolean>(
@@ -57,6 +58,7 @@ function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
+      <DBAnalysis showLine={false} />
       <ExcelReader />
 
       <Popup

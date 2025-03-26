@@ -28,8 +28,9 @@ ChartJS.register(
   Legend
 );
 
-function DBAnalysis() {
+function DBAnalysis({ showLine = true }: { showLine?: boolean }) {
   const [rows] = useRecoilState(rowsDataState);
+
   const [startAllDatesState, setstartAllDatesState] = useState<string[]>([]);
   const [anlysisData, setAnlysisData] = useState<{
     camingOfYears: any;
@@ -101,8 +102,6 @@ function DBAnalysis() {
             `${key}`.toString().trim().toLowerCase() === "5" &&
             !row[2].includes("شطب")
           ) {
-            console.log(row[2]);
-
             switch (value) {
               case "عليا":
                 unShadbCrLevel.high += 1;
@@ -155,8 +154,10 @@ function DBAnalysis() {
       camingOfYears: handleDataCountYears,
     }));
   }, [startAllDatesState, rows]);
-  console.log("anlysisData", anlysisData);
-
+  // console.log(rows.length);
+  if (rows.length <= 0) {
+    return <></>;
+  }
   const labels = Object.keys(anlysisData.camingOfYears);
   const dataValues = Object.values(anlysisData.camingOfYears);
 
@@ -205,7 +206,7 @@ function DBAnalysis() {
           usually={anlysisData.unShadbCrLevel.usually}
         />
       </div>
-      <Line data={chartData} options={options} className={` `} />
+      {showLine && <Line data={chartData} options={options} className={` `} />}
     </div>
   );
 }
