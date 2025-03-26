@@ -37,7 +37,6 @@ const Navbar: React.FC = () => {
         setDarkMode((prev) => !prev);
         document.body.classList.toggle("dark");
 
-
         localStorage.setItem(
           "mode",
           localStorage.getItem("mode") === "dark" ? "light" : "dark"
@@ -51,75 +50,77 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav
-      className={`py-2 ${
-        darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
-      } shadow-md`}
-    >
+    <>
       <ToastContainer />
       <WhatsNameSSF />
-      <div className="container mx-auto sm:px-0 px-2 flex justify-between items-center relative">
-        <NavLink to="/" className={`flex items-center gap-2`}>
-          <img src={logo} alt="logo" className="w-14 h-14 rounded-full" />
-          <h1 className="text-xl aref-ruqaa-bold">
-            قوات أمن{" "}
-            <span className="underline text-[#cc6969]">
-              {typeof window !== "undefined" && nameSSF
-                ? nameSSF.toString()
-                : ""}
-            </span>
-          </h1>
-        </NavLink>
-        {/* Links */}
-        <ul className="hidden sm:flex gap-4 absolute left-[50%] -translate-x-[50%]">
-          {linksApp.map((link, index) => (
-            <li key={index}>
-              <NavLink
-                to={link.link} // Ensure valid paths in linksApp
-                className={`hover:text-[#5f2323] hover:underline duration-200`}
-              >
-                {link.name}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+      <nav
+        className={`sticky top-0 z-[9] py-2 ${
+          darkMode ? "bg-gray-800 text-white" : "bg-white text-black"
+        } shadow-md`}
+      >
+        <div className="container mx-auto sm:px-0 px-2 flex justify-between items-center relative">
+          <NavLink to="/" className={`flex items-center gap-2`}>
+            <img src={logo} alt="logo" className="w-14 h-14 rounded-full" />
+            <h1 className="text-xl aref-ruqaa-bold">
+              قوات أمن{" "}
+              <span className="underline text-[#cc6969]">
+                {typeof window !== "undefined" && nameSSF
+                  ? nameSSF.toString()
+                  : ""}
+              </span>
+            </h1>
+          </NavLink>
+          {/* Links */}
+          <ul className="hidden sm:flex gap-4 absolute left-[50%] -translate-x-[50%]">
+            {linksApp.map((link, index) => (
+              <li key={index}>
+                <NavLink
+                  to={link.link} // Ensure valid paths in linksApp
+                  className={`hover:text-[#5f2323] hover:underline duration-200`}
+                >
+                  {link.name}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
 
-        <div className={`flex gap-4 items-center`}>
-          <button
-            onClick={toggleDarkMode}
-            className={`cursor-pointer p-[10px] rounded-[5px] ${
-              darkMode ? `bg-[#161c25a1]` : `bg-[#f0f0f082]`
-            }`}
-          >
-            {!darkMode ? "🌙" : "☀️"}
-          </button>
-          {/* toggle menu (Side Bar) */}
-          <button
-            className={`sm:hidden block p-[10px] rounded-[5px] ${
-              darkMode ? `bg-[#161c25a1]` : `bg-[#f0f0f082]`
-            }`}
-            onClick={() => {
-              setSidebar((prive) => !prive);
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
+          <div className={`flex gap-4 items-center`}>
+            <button
+              onClick={toggleDarkMode}
+              className={`cursor-pointer p-[10px] rounded-[5px] ${
+                darkMode ? `bg-[#161c25a1]` : `bg-[#f0f0f082]`
+              }`}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
-              />
-            </svg>
-          </button>
+              {!darkMode ? "🌙" : "☀️"}
+            </button>
+            {/* toggle menu (Side Bar) */}
+            <button
+              className={`sm:hidden block p-[10px] rounded-[5px] ${
+                darkMode ? `bg-[#161c25a1]` : `bg-[#f0f0f082]`
+              }`}
+              onClick={() => {
+                setSidebar((prive) => !prive);
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 };
 

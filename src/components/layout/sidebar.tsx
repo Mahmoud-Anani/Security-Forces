@@ -14,15 +14,15 @@ function Sidebar() {
       if (sidebarUiRef.current) {
         sidebarUiRef.current.style.display = "none";
       }
+
     }, 400);
   } else {
+
     if (sidebarUiRef.current) {
       sidebarUiRef.current.style.display = "block";
     }
   }
   useEffect(() => {
-    document.body.style.maxHeight = "100vh";
-    document.body.style.overflow = "hidden";
   }, []);
 
   return (
