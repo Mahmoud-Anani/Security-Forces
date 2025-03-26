@@ -2,11 +2,13 @@ import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
 
 import { useEffect, useState } from "react";
+import { rowsDataState } from "../../stores/seniorDate";
+import { useRecoilState } from "recoil";
 
 const paginationModel = { page: 0, pageSize: 12 };
 function ViewDataExcel({ data }: any) {
   const [columns, setColumns] = useState<GridColDef[]>([]);
-  const [rows, setRows] = useState<any[]>([]);
+  const [rows, setRows] = useRecoilState(rowsDataState);
   // console.log(data);
 
   useEffect(() => {

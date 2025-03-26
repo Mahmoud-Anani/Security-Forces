@@ -31,4 +31,9 @@ export const enterPasswordAppState = atom({
   default: false,
 });
 
+
+export const rowsDataState = atom({
+  key: "rowsDataState",
+  default: [],
+});
 export { nameSSFState, SeniorDataErrors, sidebarState };

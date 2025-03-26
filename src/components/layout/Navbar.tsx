@@ -12,6 +12,7 @@ import WhatsNameSSF from "./whatsNameSSF";
 import { ToastContainer } from "react-toastify";
 
 import { NavLink } from "react-router"; // Correct import for NavLink
+import MainRender from "./mainRender";
 const Navbar: React.FC = () => {
   const [nameSSF] = useRecoilState(nameSSFState);
   const [darkMode, setDarkMode] = useRecoilState(isDarkModeState);
@@ -53,6 +54,7 @@ const Navbar: React.FC = () => {
     <>
       <ToastContainer />
       <WhatsNameSSF />
+      <MainRender />
       <nav
         className={`sticky top-0 z-[9] py-2 ${
           darkMode ? "bg-gray-800 text-white" : "bg-white text-black"

@@ -9,7 +9,11 @@ export const linksApp = [
   },
   {
     name: "الاستعلامات",
-    link: "/DataBaseView",
+    link: "/data-base-view",
+  },
+  {
+    name: "التحليلات",
+    link: "/analysis",
   },
 ];
 
