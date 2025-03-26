@@ -3,11 +3,11 @@ import Paper from "@mui/material/Paper";
 
 import { useEffect, useState } from "react";
 
-const paginationModel = { page: 0, pageSize: 5 };
+const paginationModel = { page: 0, pageSize: 12 };
 function ViewDataExcel({ data }: any) {
   const [columns, setColumns] = useState<GridColDef[]>([]);
   const [rows, setRows] = useState<any[]>([]);
-  console.log(data);
+  // console.log(data);
 
   useEffect(() => {
     if (data.length > 0) {
@@ -18,16 +18,26 @@ function ViewDataExcel({ data }: any) {
         headerName: data[0]?.[index] || key,
         width: 200,
         renderCell: (params) => {
+          let value = params?.value ?? ""; // Ensure params and value are defined
+
+          // Convert Date objects to localized strings
+          if (value instanceof Date) {
+            value = value.toLocaleDateString("ar-EG");
+          }
+
+          const displayValue = value || `لا يوجد بيانات ${value}`; // Fallback text if value is empty
+          const isMissingData = `${displayValue}`.includes("لا يوجد");
+
           return (
             <span
-              className="text-xl "
+              className="text-xl"
               style={{
                 textAlign: "center",
-                color: !`${params.value}`.includes("لا يوجد") ? "black" : "red",
+                color: isMissingData ? "red" : "black",
                 fontWeight: "bold",
               }}
             >
-              {params.value}
+              {displayValue}
             </span>
           );
         },
@@ -64,7 +74,7 @@ function ViewDataExcel({ data }: any) {
   }, [data]);
   return (
     <>
-      <Paper sx={{ height: 400, width: "100%", direction: "rtl" }}>
+      <Paper sx={{ height: 800, width: "100%", direction: "rtl" }}>
         <DataGrid
           className={`text-right`}
           rows={rows}

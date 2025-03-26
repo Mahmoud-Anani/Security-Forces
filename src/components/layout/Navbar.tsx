@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
         event.preventDefault(); // Prevent default behavior
         setDarkMode((prev) => !prev);
         document.body.classList.toggle("dark");
-        console.log("click");
+
 
         localStorage.setItem(
           "mode",

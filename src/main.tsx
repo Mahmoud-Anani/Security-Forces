@@ -15,9 +15,8 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { BrowserRouter } from "react-router";
 
-
 import "react-datepicker/dist/react-datepicker.css";
-
+import Copyright from "./components/layout/copyright.tsx";
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/sw.js");
@@ -55,6 +54,7 @@ createRoot(document.getElementById("root")!).render(
               <Navbar />
               <Sidebar />
               <App />
+              <Copyright />
             </StyledEngineProvider>
           </RecoilRoot>
         </BrowserRouter>

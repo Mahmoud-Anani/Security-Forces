@@ -277,7 +277,6 @@ export default function SeniorDate() {
           // action={handleFormSubmit}
           onSubmit={(e) => {
             e.preventDefault();
-            console.log("tex");
 
             if (ref.current) {
               handleFormSubmit(new FormData(ref.current));

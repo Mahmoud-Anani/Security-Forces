@@ -1,5 +1,6 @@
 import { atom } from "recoil";
 
+// Popup
 const nameSSFState = atom({
   key: "nameSSFState",
   default: "",
@@ -24,6 +25,7 @@ export const workbookDataState = atom({
   key: "workbookDataState",
   default: [],
 });
+// Popup
 export const enterPasswordAppState = atom({
   key: "enterPasswordAppState",
   default: false,

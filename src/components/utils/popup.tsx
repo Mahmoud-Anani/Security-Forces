@@ -18,13 +18,15 @@ const Popup: React.FC<PopupProps> = ({
   if (!isVisible) return null;
 
   const OnCloseButNotAddSSF = () => {
+    // document.body.style.maxHeight = "auto";
+    // document.body.style.overflow = "auto";
     onClose();
   };
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    document.body.style.maxHeight = "100vh";
-    document.body.style.overflow = "hidden";
+    // document.body.style.maxHeight = "100vh";
+    // document.body.style.overflow = "hidden";
   }, []);
 
   return (
