@@ -2,7 +2,11 @@
     text-align: start !important;
 }
 
-.MuiDataGrid-columnHeaderTitleContainer{
+.MuiDataGrid-columnHeaderTitleContainer {
     text-align: center !important;
     font-size: x-large;
+}
+
+.css-1gak8h1-MuiToolbar-root-MuiTablePagination-toolbar {
+    direction: ltr !important;
 }
