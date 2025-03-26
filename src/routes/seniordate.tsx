@@ -9,6 +9,7 @@ import SubError from "../components/seniorDate/subError";
 import RedifTypePush from "../components/seniorDate/RedifType-push";
 import { isDarkModeState, SeniorDataErrors } from "../stores/seniorDate";
 import { useRecoilState } from "recoil";
+import { Helmet } from "react-helmet";
 
 // export function meta({}: Route.MetaArgs) {
 //   return [
@@ -271,6 +272,14 @@ export default function SeniorDate() {
 
   return (
     <>
+      <Helmet>
+        <title>شؤون المجندين || تاريخ التسريح</title>
+        <meta
+          name="description"
+          content="تطبيق شؤون المجندين لوزارة الداخلية يهدف الي تطوير البنية التحتيتة لوزارة الداخلية وزيادة كفاءة الخدمات المقدمة للشعب المصري وتسهيل الاجراءات الخاصة بالمجندين"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Helmet>
       <div className={`flex justify-center mt-16 container mx-auto`}>
         <form
           ref={ref}

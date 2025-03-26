@@ -7,6 +7,10 @@ export const linksApp = [
     name: "تاريخ التسريح",
     link: "/senior-date",
   },
+  {
+    name: "الاستعلامات",
+    link: "/DataBaseView",
+  },
 ];
 
 export const listSSFs = [

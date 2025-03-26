@@ -74,18 +74,15 @@ function ViewDataExcel({ data }: any) {
   }, [data]);
   return (
     <>
-      <Paper
-        sx={{ height: 800, width: "100%", overflowX: "auto" }}
-      >
+      <Paper sx={{ height: 800, width: "100%", overflowX: "auto" }}>
         <DataGrid
           className="text-right ms-5"
-          style={{ width: "290.6pc", direction:"ltr" }}
+          style={{ width: "290.6pc", direction: "ltr" }}
           rows={rows}
           columns={columns}
           initialState={{ pagination: { paginationModel } }}
           pageSizeOptions={[5, 10]}
           checkboxSelection
-          columnVisibilityModel={undefined}
           sx={{
             border: 0,
           }}
