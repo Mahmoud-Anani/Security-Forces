@@ -10,3 +10,7 @@
 .css-1gak8h1-MuiToolbar-root-MuiTablePagination-toolbar {
     direction: ltr !important;
 }
+
+.MuiDataGrid-main{
+    direction: rtl !important;
+}
