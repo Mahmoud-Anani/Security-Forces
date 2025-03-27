@@ -11,7 +11,7 @@ function ViewDataExcel({ data }: any) {
   const [rows, setRows] = useRecoilState(rowsDataState);
   const [filteredRows, setFilteredRows] = useState<any[]>([]);
   const [filters, setFilters] = useState<{ [key: string]: string }>({});
-  const [isInitialized, setIsInitialized] = useState(false); 
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     if (data.length > 0) {
@@ -55,8 +55,8 @@ function ViewDataExcel({ data }: any) {
               ];
             }
 
-            if (typeof value === "string" && value.includes("000Z")) {
-              return [key, new Date(value).toLocaleDateString("ar-EG")];
+            if (`${value}`.includes("000Z") || `${value}`.includes("GMT")) {
+              return [key, new Date(`${value}`).toLocaleDateString("ar-EG")];
             }
 
             return [key, value];
@@ -70,7 +70,7 @@ function ViewDataExcel({ data }: any) {
       });
 
       setRows(formattedRows);
-      setIsInitialized(true); 
+      setIsInitialized(true);
     }
   }, [data]);
 
@@ -78,7 +78,7 @@ function ViewDataExcel({ data }: any) {
     if (isInitialized) {
       setFilteredRows(rows);
     }
-  }, [rows, isInitialized]); 
+  }, [rows, isInitialized]);
 
   useEffect(() => {
     if (isInitialized) {
