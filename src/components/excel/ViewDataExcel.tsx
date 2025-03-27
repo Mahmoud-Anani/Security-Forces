@@ -113,7 +113,7 @@ function ViewDataExcel({ data }: any) {
             type="text"
             placeholder={`فلتر حسب ${col.headerName}`}
             onChange={(e) => handleFilterChange(col.field, e.target.value)}
-            className={`focus-visible:outline-2 focus-visible:outline-[#70ee96] focus-visible:border-2 focus-visible:!border-[#01922d]`}
+            className={`focus-visible:outline-2 focus-visible:outline-[#70ee96] focus-visible:border-2 focus-visible:!border-[#cc6969]`}
             style={{
               padding: "5px",
               border: "1px solid #ccc",

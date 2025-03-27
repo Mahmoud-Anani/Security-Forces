@@ -9,6 +9,7 @@ import {
 } from "../../stores/seniorDate";
 import { useRecoilState } from "recoil";
 import Cookies from "js-cookie";
+import MobileGifDragDrop from "../mobileGifDragDrop";
 
 function CheckFileExtension(event: React.DragEvent<HTMLDivElement>) {
   //   log extention file
@@ -108,13 +109,19 @@ const ExcelReader: React.FC = () => {
           } ${dragple ? "border-8" : "border-2 "} p-5 relative overflow-hidden`}
         >
           <div className="flex justify-between items-center -z-10 absolute top-[50%] left-[50%] -translate-[50%]">
-            <img src={dragDropGif} className={`rounded-4xl object-cover`} />
+            <img
+              src={dragDropGif}
+              className={`sm:block hidden rounded-4xl object-cover`}
+            />
+            <div className={`sm:hidden block`}>
+              <MobileGifDragDrop />
+            </div>
           </div>
 
           <input
             className={`${
               data.length > 0 ? "" : "opacity-0 w-full h-full"
-            } text-[#01922d]`}
+            } text-[#cc6969]`}
             type="file"
             accept=".xlsx, .xls"
             onChange={handleFileInputChange}
@@ -124,7 +131,7 @@ const ExcelReader: React.FC = () => {
       <input
         className={`${
           data.length > 0 ? "" : "opacity-0 w-full h-full"
-        } text-[#01922d]`}
+        } text-[#cc6969]`}
         type="file"
         accept=".xlsx, .xls"
         onChange={handleFileInputChange}
