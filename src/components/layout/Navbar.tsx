@@ -100,9 +100,7 @@ const Navbar: React.FC = () => {
               className={`sm:hidden block p-[10px] rounded-[5px] ${
                 darkMode ? `bg-[#161c25a1]` : `bg-[#f0f0f082]`
               }`}
-              onClick={() => {
-                setSidebar((prive) => !prive);
-              }}
+              onClick={() => setSidebar((prive) => !prive)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

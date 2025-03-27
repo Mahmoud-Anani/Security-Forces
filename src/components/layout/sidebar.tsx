@@ -6,6 +6,12 @@ import { sidebarState } from "../../stores/seniorDate";
 
 function Sidebar() {
   const [sidebar, setSidebar] = useRecoilState(sidebarState);
+  if (sidebar) {
+    // window.scrollTo({ top: 0, behavior: "smooth" });
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
 
   const sidebarUiRef = useRef<HTMLButtonElement>(null);
 
@@ -14,20 +20,17 @@ function Sidebar() {
       if (sidebarUiRef.current) {
         sidebarUiRef.current.style.display = "none";
       }
-
     }, 400);
   } else {
-
     if (sidebarUiRef.current) {
       sidebarUiRef.current.style.display = "block";
     }
   }
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div
-      className={`sm:hidden block z-20 absolute  top-0 left-0 text-white bg-[#000000e3] h-full shadow-md duration-500`}
+      className={`sm:hidden block z-20 fixed top-0 left-0 text-white bg-[#000000e3] h-full shadow-md duration-500`}
       style={{
         width: sidebar ? "100%" : "0",
         // display: sidebar ? "block" : "none",

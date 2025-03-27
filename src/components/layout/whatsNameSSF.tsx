@@ -88,7 +88,7 @@ function WhatsNameSSF() {
           </form>
         }
         onClose={() => {
-          if (!listSSFs.includes(nameSSF)) {
+          if (!listSSFs.includes(nameSSF.trim())) {
             toast.error("يجب اختيار اسم قوات الامن");
             return;
           }

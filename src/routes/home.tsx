@@ -13,7 +13,7 @@ function Home() {
     enterPasswordAppState
   );
   if (enterPasswordApp) {
-    document.body.scrollTo(0, 0);
+    // window.scrollTo({ top: 0, behavior: "smooth" });
     document.body.style.overflow = "hidden";
   } else {
     document.body.style.overflow = "auto";
