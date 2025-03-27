@@ -80,7 +80,7 @@ function ViewDataExcel({ data }: any) {
       <Paper sx={{ height: 800, width: "100%", overflowX: "auto" }}>
         <DataGrid
           className="text-right ms-5"
-          style={{  direction: "ltr" }}
+          style={{ width: "290.6pc", direction: "ltr" }} //width: "290.6pc"
           rows={rows}
           columns={columns}
           initialState={{ pagination: { paginationModel } }}

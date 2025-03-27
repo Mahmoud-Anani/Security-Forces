@@ -59,7 +59,17 @@ function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
       <DBAnalysis showLine={false} />
-      <ExcelReader />
+
+      <div className="flex flex-col items-center">
+        <h1
+          className={`text-2xl p-2 font-semibold border-b-4 border-[#01922d] hover:border-[#8eb79a] duration-200 rounded-b-2xl `}
+        >
+          للأستعلام السريع
+        </h1>
+        <div className="w-full max-w-[100%] overflow-hidden p-4 bg-white rounded-2xl shadow-md">
+          <ExcelReader />
+        </div>
+      </div>
 
       <Popup
         isVisible={enterPasswordApp}
