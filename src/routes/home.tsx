@@ -60,7 +60,7 @@ function Home() {
       </Helmet>
       <DBAnalysis showLine={false} />
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col gap-5 items-center">
         <h1
           className={`text-2xl p-2 font-semibold border-b-4 border-[#01922d] hover:border-[#8eb79a] duration-200 rounded-b-2xl `}
         >

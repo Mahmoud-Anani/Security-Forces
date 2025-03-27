@@ -11,6 +11,7 @@ function ViewDataExcel({ data }: any) {
   const [rows, setRows] = useRecoilState(rowsDataState);
   const [filteredRows, setFilteredRows] = useState<any[]>([]);
   const [filters, setFilters] = useState<{ [key: string]: string }>({});
+  const [isInitialized, setIsInitialized] = useState(false); // ✅ حل مشكلة إعادة التصيير
 
   useEffect(() => {
     if (data.length > 0) {
@@ -24,7 +25,6 @@ function ViewDataExcel({ data }: any) {
         filterable: true,
         renderCell: (params) => {
           const value = params?.value ?? "";
-
           const displayValue = String(value) || `لا يوجد بيانات`;
           const isMissingData = displayValue.includes("لا يوجد");
 
@@ -70,11 +70,25 @@ function ViewDataExcel({ data }: any) {
       });
 
       setRows(formattedRows);
-      setFilteredRows(formattedRows);
+      setIsInitialized(true); // ✅ تأكيد التهيئة لتشغيل `useEffect`
     }
   }, [data]);
 
+  useEffect(() => {
+    if (isInitialized) {
+      setFilteredRows(rows);
+    }
+  }, [rows, isInitialized]); // ✅ إعادة التصيير عند تحديث `rows`
+
+  useEffect(() => {
+    if (isInitialized) {
+      applyFilters();
+    }
+  }, [filters]);
+
   const applyFilters = () => {
+    if (!rows.length) return; // ✅ تجنب الفلترة قبل تحميل البيانات
+
     const updatedRows = rows.filter((row) =>
       Object.entries(filters).every(([column, value]) =>
         `${row[column]}`?.toString().toLowerCase().includes(value.toLowerCase())
@@ -82,10 +96,6 @@ function ViewDataExcel({ data }: any) {
     );
     setFilteredRows(updatedRows);
   };
-
-  useEffect(() => {
-    applyFilters();
-  }, [filters]);
 
   const handleFilterChange = (column: string, value: string) => {
     setFilters((prev) => ({
@@ -103,6 +113,7 @@ function ViewDataExcel({ data }: any) {
             type="text"
             placeholder={`فلتر حسب ${col.headerName}`}
             onChange={(e) => handleFilterChange(col.field, e.target.value)}
+            className={`focus-visible:outline-2 focus-visible:outline-[#70ee96] focus-visible:border-2 focus-visible:!border-[#01922d]`}
             style={{
               padding: "5px",
               border: "1px solid #ccc",
