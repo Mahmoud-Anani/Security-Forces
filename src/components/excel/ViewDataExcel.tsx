@@ -1,4 +1,4 @@
-import { DataGrid, type GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
 import { memo, useEffect, useState } from "react";
 import { rowsDataState } from "../../stores/seniorDate";
@@ -9,6 +9,8 @@ const paginationModel = { page: 0, pageSize: 12 };
 function ViewDataExcel({ data }: any) {
   const [columns, setColumns] = useState<GridColDef[]>([]);
   const [rows, setRows] = useRecoilState(rowsDataState);
+  const [filteredRows, setFilteredRows] = useState<any[]>([]);
+  const [filters, setFilters] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
     if (data.length > 0) {
@@ -19,6 +21,7 @@ function ViewDataExcel({ data }: any) {
         headerName: data[0]?.[index] || key,
         minWidth: 200,
         flex: 1,
+        filterable: true,
         renderCell: (params) => {
           const value = params?.value ?? "";
 
@@ -67,25 +70,51 @@ function ViewDataExcel({ data }: any) {
       });
 
       setRows(formattedRows);
+      setFilteredRows(formattedRows);
     }
   }, [data]);
 
+  const applyFilters = () => {
+    const updatedRows = rows.filter((row) =>
+      Object.entries(filters).every(([column, value]) =>
+        `${row[column]}`?.toString().toLowerCase().includes(value.toLowerCase())
+      )
+    );
+    setFilteredRows(updatedRows);
+  };
+
+  useEffect(() => {
+    applyFilters();
+  }, [filters]);
+
+  const handleFilterChange = (column: string, value: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      [column]: value,
+    }));
+  };
+
   return (
-    <Paper
-      sx={{
-        height: "800px",
-        width: "100%",
-        overflowX: "auto",
-        display: "flex",
-        flexDirection: "column",
-        flexGrow: 1,
-      }}
-    >
+    <Paper sx={{ width: "100%", overflowX: "auto" }}>
+      <div style={{ display: "flex", gap: "10px", padding: "10px" }}>
+        {columns.map((col) => (
+          <input
+            key={col.field}
+            type="text"
+            placeholder={`فلتر حسب ${col.headerName}`}
+            onChange={(e) => handleFilterChange(col.field, e.target.value)}
+            style={{
+              padding: "5px",
+              border: "1px solid #ccc",
+              borderRadius: "5px",
+            }}
+          />
+        ))}
+      </div>
       <DataGrid
-        className="text-left me-5"
-        style={{ width: "300pc", direction: "rtl" }}
-        autoHeight
-        rows={rows}
+        style={{ width: "400pc", direction: "rtl" }}
+        className="text-right ms-5"
+        rows={filteredRows}
         columns={columns}
         initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[5, 10]}
