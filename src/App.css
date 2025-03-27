@@ -7,10 +7,10 @@
     font-size: x-large;
 }
 
-.css-1gak8h1-MuiToolbar-root-MuiTablePagination-toolbar {
+.css-1gak8h1-MuiToolbar-root-MuiTablePagination-toolbar, .MuiToolbar-root {
     direction: ltr !important;
 }
 
-.MuiDataGrid-main{
+.MuiDataGrid-main {
     direction: rtl !important;
 }
