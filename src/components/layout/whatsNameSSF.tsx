@@ -9,7 +9,12 @@ function WhatsNameSSF() {
   const [nameSSF, setNameSSF] = useRecoilState(nameSSFState);
   const [isPopupVisible, setPopupVisible] = useRecoilState(isPopupVisibleState);
   const [errorNameSSF, setErrorNameSSF] = useState("");
-
+  if (isPopupVisible) {
+    document.body.scrollTo(0, 0);
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
   const handleNameChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setErrorNameSSF("");

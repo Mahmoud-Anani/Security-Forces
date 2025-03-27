@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import logo from "../../../public/favicon.ico";
 
 interface PopupProps {
@@ -21,11 +20,6 @@ const Popup: React.FC<PopupProps> = ({
     onClose();
     document.body.style.overflow = "auto";
   };
-  // alert(window.outerHeight);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-  }, []);
 
   return (
     <>

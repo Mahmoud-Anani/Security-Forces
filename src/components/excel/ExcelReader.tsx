@@ -26,10 +26,8 @@ const ExcelReader: React.FC = () => {
   const [, setEnterPasswordApp] = useRecoilState<boolean>(
     enterPasswordAppState
   );
-// alert(data)
-useEffect(() => {
-  const data = localStorage.getItem("workbookData") || [];
-
+  useEffect(() => {
+    const data = localStorage.getItem("workbookData") || [];
 
     if (data.length > 0) {
       // @ts-ignore
@@ -66,7 +64,6 @@ useEffect(() => {
       localStorage.setItem("workbookData", JSON.stringify(sheetData));
       setData(sheetData);
     };
-    // alert("تم تحميل الملف بنجاح");
   };
 
   const handleFileInputChange = (
@@ -115,7 +112,9 @@ useEffect(() => {
           </div>
 
           <input
-            className={`${data.length > 0 ? "" : "opacity-0 w-full h-full"}`}
+            className={`${
+              data.length > 0 ? "" : "opacity-0 w-full h-full"
+            } text-[#01922d]`}
             type="file"
             accept=".xlsx, .xls"
             onChange={handleFileInputChange}
@@ -123,7 +122,9 @@ useEffect(() => {
         </div>
       )}
       <input
-        className={`${data.length > 0 ? "" : "opacity-0 w-full h-full"}`}
+        className={`${
+          data.length > 0 ? "" : "opacity-0 w-full h-full"
+        } text-[#01922d]`}
         type="file"
         accept=".xlsx, .xls"
         onChange={handleFileInputChange}

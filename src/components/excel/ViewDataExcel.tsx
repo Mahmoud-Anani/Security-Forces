@@ -11,7 +11,7 @@ function ViewDataExcel({ data }: any) {
   const [rows, setRows] = useRecoilState(rowsDataState);
   const [filteredRows, setFilteredRows] = useState<any[]>([]);
   const [filters, setFilters] = useState<{ [key: string]: string }>({});
-  const [isInitialized, setIsInitialized] = useState(false); // ✅ حل مشكلة إعادة التصيير
+  const [isInitialized, setIsInitialized] = useState(false); 
 
   useEffect(() => {
     if (data.length > 0) {
@@ -70,7 +70,7 @@ function ViewDataExcel({ data }: any) {
       });
 
       setRows(formattedRows);
-      setIsInitialized(true); // ✅ تأكيد التهيئة لتشغيل `useEffect`
+      setIsInitialized(true); 
     }
   }, [data]);
 
@@ -78,7 +78,7 @@ function ViewDataExcel({ data }: any) {
     if (isInitialized) {
       setFilteredRows(rows);
     }
-  }, [rows, isInitialized]); // ✅ إعادة التصيير عند تحديث `rows`
+  }, [rows, isInitialized]); 
 
   useEffect(() => {
     if (isInitialized) {
@@ -87,7 +87,7 @@ function ViewDataExcel({ data }: any) {
   }, [filters]);
 
   const applyFilters = () => {
-    if (!rows.length) return; // ✅ تجنب الفلترة قبل تحميل البيانات
+    if (!rows.length) return;
 
     const updatedRows = rows.filter((row) =>
       Object.entries(filters).every(([column, value]) =>

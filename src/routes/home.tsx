@@ -12,7 +12,12 @@ function Home() {
   const [enterPasswordApp, setEnterPasswordApp] = useRecoilState<boolean>(
     enterPasswordAppState
   );
-
+  if (enterPasswordApp) {
+    document.body.scrollTo(0, 0);
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
   const [value, setValue] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -66,7 +71,7 @@ function Home() {
         >
           للأستعلام السريع
         </h1>
-        <div className="w-full max-w-[100%] overflow-hidden p-4 bg-white rounded-2xl shadow-md">
+        <div className="w-full ">
           <ExcelReader />
         </div>
       </div>

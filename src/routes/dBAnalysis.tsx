@@ -187,6 +187,7 @@ function DBAnalysis({ showLine = true }: { showLine?: boolean }) {
       },
     },
   };
+  console.log(anlysisData);
 
   return (
     <div className={`container mx-auto`}>
