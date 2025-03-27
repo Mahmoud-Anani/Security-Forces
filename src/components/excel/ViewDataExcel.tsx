@@ -1,16 +1,14 @@
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
-
 import { memo, useEffect, useState } from "react";
 import { rowsDataState } from "../../stores/seniorDate";
 import { useRecoilState } from "recoil";
 
 const paginationModel = { page: 0, pageSize: 12 };
+
 function ViewDataExcel({ data }: any) {
   const [columns, setColumns] = useState<GridColDef[]>([]);
   const [rows, setRows] = useRecoilState(rowsDataState);
-  // alert('viewDataExcel');
-  // alert(data);
 
   useEffect(() => {
     if (data.length > 0) {
@@ -19,17 +17,13 @@ function ViewDataExcel({ data }: any) {
       const columnsData: GridColDef[] = keys.map((key, index) => ({
         field: key,
         headerName: data[0]?.[index] || key,
-        width: 200,
+        minWidth: 200,
+        flex: 1,
         renderCell: (params) => {
-          let value = params?.value ?? ""; // Ensure params and value are defined
+          const value = params?.value ?? "";
 
-          // Convert Date objects to localized strings
-          if (value instanceof Date) {
-            value = value.toLocaleDateString("ar-EG");
-          }
-
-          const displayValue = value || `لا يوجد بيانات ${value}`; // Fallback text if value is empty
-          const isMissingData = `${displayValue}`.includes("لا يوجد");
+          const displayValue = String(value) || `لا يوجد بيانات`;
+          const isMissingData = displayValue.includes("لا يوجد");
 
           return (
             <span
@@ -75,23 +69,30 @@ function ViewDataExcel({ data }: any) {
       setRows(formattedRows);
     }
   }, [data]);
+
   return (
-    <>
-      <Paper sx={{ height: 800, width: "100%", overflowX: "auto" }}>
-        <DataGrid
-          className="text-right ms-5"
-          style={{ width: "290.6pc", direction: "ltr" }} //width: "290.6pc"
-          rows={rows}
-          columns={columns}
-          initialState={{ pagination: { paginationModel } }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-          sx={{
-            border: 0,
-          }}
-        />
-      </Paper>
-    </>
+    <Paper
+      sx={{
+        height: "800px",
+        width: "100%",
+        overflowX: "auto",
+        display: "flex",
+        flexDirection: "column",
+        flexGrow: 1,
+      }}
+    >
+      <DataGrid
+        className="text-left me-5"
+        style={{ width: "300pc", direction: "rtl" }}
+        autoHeight
+        rows={rows}
+        columns={columns}
+        initialState={{ pagination: { paginationModel } }}
+        pageSizeOptions={[5, 10]}
+        checkboxSelection
+        sx={{ border: 0 }}
+      />
+    </Paper>
   );
 }
 
