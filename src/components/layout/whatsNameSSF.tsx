@@ -23,7 +23,7 @@ function WhatsNameSSF() {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
 
-      if (!listSSFs.includes(value)) {
+      if (!listSSFs.includes(value.trim())) {
         setErrorNameSSF("تــأكد مـن اســم قـوات الأمــن");
       } else {
         setErrorNameSSF("");
@@ -56,7 +56,7 @@ function WhatsNameSSF() {
         title="مَرْحَبًا بِكَ فِي نِظَامِ إِدَارَةِ قُوَّاتِ الأَمْنِ"
         content={
           <form
-            className="flex flex-col gap-4 px-2 "
+            className="flex flex-col gap-4"
             onSubmit={(e) => e.preventDefault()}
           >
             <label htmlFor="nameSSF">
@@ -68,7 +68,7 @@ function WhatsNameSSF() {
                 onBlur={handleOnblurName}
                 onChange={handleNameChange}
                 value={nameSSF}
-                className={`text-center w-[100%] rounded-2xl border-2 border-[#3f282811] p-2 my-2`}
+                className={`text-center w-[100%] rounded-2xl outline-0 border-2 border-[#261f1f] p-2 my-2`}
                 list="nameSSFs"
               />
               <datalist id="nameSSFs">

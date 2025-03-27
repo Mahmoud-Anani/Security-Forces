@@ -36,7 +36,7 @@ const Popup: React.FC<PopupProps> = ({
         >
           ❌
         </button>
-        <div className="flex flex-col items-center gap-4 sm:p-4 py-2 rounded-lg ">
+        <div className="flex flex-col items-center gap-4 sm:p-4 py-2 px-5 rounded-lg ">
           <img src={logo} alt="logo" className="w-40 h-40 rounded-full" />
           <div className="flex gap-1 justify-center items-center">
             <h2>{title}</h2>
@@ -45,7 +45,7 @@ const Popup: React.FC<PopupProps> = ({
         </div>
       </div>
       <div
-        className={`h-[100vw] w-[100%] backdrop-blur-sm  absolute top-0 left-0 z-[99] opacity-90 bg-black`}
+        className={`sm:h-[100vw] h-[100vh] w-[100%] backdrop-blur-sm absolute top-0 left-0 z-[99] opacity-90 bg-black`}
         onClick={OnCloseButNotAddSSF}
       ></div>
     </>
