@@ -39,7 +39,7 @@ const Popup: React.FC<PopupProps> = ({
         </div>
       </div>
       <div
-        className={`h-[100vh] w-[100%] backdrop-blur-sm absolute top-0 left-0 z-[99] opacity-90 bg-black`}
+        className={`sm:h-[100vh] h-[100vh] w-[100%] backdrop-blur-sm absolute top-0 left-0 z-[99] opacity-90 bg-black`}
         onClick={OnCloseButNotAddSSF}
       ></div>
     </>
