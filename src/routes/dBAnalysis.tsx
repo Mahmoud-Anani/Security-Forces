@@ -154,7 +154,6 @@ function DBAnalysis({ showLine = true }: { showLine?: boolean }) {
       camingOfYears: handleDataCountYears,
     }));
   }, [startAllDatesState, rows]);
-  // console.log(rows.length);
   if (rows.length <= 0) {
     return <></>;
   }
@@ -187,18 +186,25 @@ function DBAnalysis({ showLine = true }: { showLine?: boolean }) {
       },
     },
   };
-  console.log(anlysisData);
-
+  const isViewShadb =
+    anlysisData.crLevel.high !== anlysisData.unShadbCrLevel.high &&
+    anlysisData.crLevel.medium !== anlysisData.unShadbCrLevel.medium &&
+    anlysisData.crLevel.upperAverage !==
+      anlysisData.unShadbCrLevel.upperAverage &&
+    anlysisData.crLevel.usually !== anlysisData.unShadbCrLevel.usually;
   return (
     <div className={`container mx-auto`}>
-      <div className={`flex justify-between flex-wrap gap-5`}>
-        <CrLevelAnalysis
-          title="مجند مع الشطب"
-          high={anlysisData.crLevel.high}
-          medium={anlysisData.crLevel.medium}
-          upperAverage={anlysisData.crLevel.upperAverage}
-          usually={anlysisData.crLevel.usually}
-        />
+      <div className={`flex justify-${isViewShadb?"between":"center"} flex-wrap gap-5`}>
+        {isViewShadb && (
+          // false = في شطب
+          <CrLevelAnalysis
+            title="مجند مع الشطب"
+            high={anlysisData.crLevel.high}
+            medium={anlysisData.crLevel.medium}
+            upperAverage={anlysisData.crLevel.upperAverage}
+            usually={anlysisData.crLevel.usually}
+          />
+        )}
         <CrLevelAnalysis
           title="مجند بدون الشطب"
           high={anlysisData.unShadbCrLevel.high}
