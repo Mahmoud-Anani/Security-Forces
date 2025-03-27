@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import * as ExcelJS from "exceljs";
 import ViewDataExcel from "./ViewDataExcel";
 import { toast } from "react-toastify";
@@ -26,9 +26,11 @@ const ExcelReader: React.FC = () => {
   const [, setEnterPasswordApp] = useRecoilState<boolean>(
     enterPasswordAppState
   );
+// alert(data)
+useEffect(() => {
+  const data = localStorage.getItem("workbookData") || [];
 
-  useEffect(() => {
-    const data = localStorage.getItem("workbookData") || [];
+
     if (data.length > 0) {
       // @ts-ignore
       setData(JSON.parse(data));
@@ -64,6 +66,7 @@ const ExcelReader: React.FC = () => {
       localStorage.setItem("workbookData", JSON.stringify(sheetData));
       setData(sheetData);
     };
+    // alert("تم تحميل الملف بنجاح");
   };
 
   const handleFileInputChange = (
@@ -130,4 +133,4 @@ const ExcelReader: React.FC = () => {
   );
 };
 
-export default ExcelReader;
+export default memo(ExcelReader);

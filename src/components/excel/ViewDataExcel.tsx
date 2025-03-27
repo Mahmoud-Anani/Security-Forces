@@ -1,7 +1,7 @@
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
 
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { rowsDataState } from "../../stores/seniorDate";
 import { useRecoilState } from "recoil";
 
@@ -9,7 +9,8 @@ const paginationModel = { page: 0, pageSize: 12 };
 function ViewDataExcel({ data }: any) {
   const [columns, setColumns] = useState<GridColDef[]>([]);
   const [rows, setRows] = useRecoilState(rowsDataState);
-  // console.log(data);
+  // alert('viewDataExcel');
+  // alert(data);
 
   useEffect(() => {
     if (data.length > 0) {
@@ -79,7 +80,7 @@ function ViewDataExcel({ data }: any) {
       <Paper sx={{ height: 800, width: "100%", overflowX: "auto" }}>
         <DataGrid
           className="text-right ms-5"
-          style={{ width: "290.6pc", direction: "ltr" }}
+          style={{  direction: "ltr" }}
           rows={rows}
           columns={columns}
           initialState={{ pagination: { paginationModel } }}
@@ -94,4 +95,4 @@ function ViewDataExcel({ data }: any) {
   );
 }
 
-export default ViewDataExcel;
+export default memo(ViewDataExcel);

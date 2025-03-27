@@ -18,13 +18,13 @@ const Popup: React.FC<PopupProps> = ({
   if (!isVisible) return null;
 
   const OnCloseButNotAddSSF = () => {
-
     onClose();
+    document.body.style.overflow = "auto";
   };
-
+  // alert(window.outerHeight);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-
+    document.body.style.overflow = "hidden";
   }, []);
 
   return (
@@ -45,7 +45,7 @@ const Popup: React.FC<PopupProps> = ({
         </div>
       </div>
       <div
-        className={`sm:h-[100vw] h-[100vh] w-[100%] backdrop-blur-sm absolute top-0 left-0 z-[99] opacity-90 bg-black`}
+        className={`h-[100vh] w-[100%] backdrop-blur-sm absolute top-0 left-0 z-[99] opacity-90 bg-black`}
         onClick={OnCloseButNotAddSSF}
       ></div>
     </>
