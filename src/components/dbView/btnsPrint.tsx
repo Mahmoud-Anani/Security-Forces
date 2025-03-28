@@ -20,7 +20,14 @@ function BtnsPrint() {
     setDataState(() => [...dataPrint]);
   }, [dataSelected, rows]);
 
-  const [value, setValue] = useState<string>("");
+  const currentYearMonthDayAR = new Date().toLocaleString("ar-EG", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+  const [value, setValue] = useState<string>(
+    `كــشــف     بــتــاريــخ ${currentYearMonthDayAR}م`
+  );
   const [enterSheetName, setEnterSheetName] = useState<boolean>(false);
 
   const handleSheetNameChange = useCallback(
@@ -29,11 +36,6 @@ function BtnsPrint() {
     },
     []
   );
-  const currentYearMonthDayAR = new Date().toLocaleString("ar-EG", {
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-  });
   const inputRef = useRef(null);
   const handleFormSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -41,7 +43,7 @@ function BtnsPrint() {
       reactToPrintFn();
       setEnterSheetName(false);
     },
-    [value, setEnterSheetName]
+    [setValue, setEnterSheetName]
   );
 
   return (
@@ -117,7 +119,7 @@ function BtnsPrint() {
           طـبـاعـة كــشــف اســمـاء فــقــط
         </Button>
         <Button
-          className={`w-full !text-[20px] !bg-[#c27272df] !border-0 !rounded-none`}
+          className={`w-full !text-[20px] !bg-[#c27272df] !border-0 !rounded-none !rounded-l-[5px]`}
           disabled={!(dataSelected.length > 0)}
         >
           طـبـاعـة حــســب الــجــدول
@@ -138,7 +140,7 @@ function BtnsPrint() {
                 ref={inputRef}
                 type={`text`}
                 onChange={handleSheetNameChange}
-                defaultValue={`كــشــف     بــتــاريــخ ${currentYearMonthDayAR}م`}
+                defaultValue={value}
                 className={`border-0 outline-0 p-2 w-full`}
               />
             </form>
