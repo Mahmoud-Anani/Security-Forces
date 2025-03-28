@@ -51,13 +51,13 @@ function BtnsPrint() {
           ref={contentRef}
           className={`p-5 `}
           style={{
-
             width: "100%",
           }}
         >
-          <h1 className="border border-black text-center text-3xl p-5">
-            كشف مجندين
+          <h1 className="border font-extrabold border-black bg-[#00000007] text-center text-3xl p-5">
+            {value}
           </h1>
+
           <table
             style={{
               width: "100%",
@@ -68,14 +68,32 @@ function BtnsPrint() {
             <thead className={`text-[36px]`}>
               {/* <th className={`border border-black`}>م</th>
           <th className={`border border-black`}>الأســــــــم</th> */}
-              <th className={`border border-black px-2`}>م</th>
-              <th className={`border border-black px-2`}>الأســــــــم</th>
+              <th className={`border border-black hidden px-2`}>م</th>
+              <th className={`border border-black hidden px-2`}>
+                الأســــــــم
+              </th>
             </thead>
             <tbody>
+              <tr>
+                <td
+                  className={`text-center font-bold text-2xl border-x border-black p-2 w-[7%] `}
+                >
+                  م
+                </td>
+                <td
+                  className={`text-center font-bold text-2xl border-x border-black px-2 w-[93%]`}
+                >
+                  الأســــــــم
+                </td>
+              </tr>
               {dataState.map((row, index) => (
                 <tr key={index} className={`text-[26px]`}>
-                  <td className={`border border-black px-2`}>{index + 1}</td>
-                  <td className={`border border-black px-2`}>{row[1]}</td>
+                  <td className={`border border-black px-2 w-[7%]`}>
+                    {index + 1}
+                  </td>
+                  <td className={`border border-black px-2 w-[93%]`}>
+                    {row[1]}
+                  </td>
                 </tr>
               ))}
             </tbody>

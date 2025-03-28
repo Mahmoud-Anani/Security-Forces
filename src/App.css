@@ -14,3 +14,18 @@
 .MuiDataGrid-main {
     direction: rtl !important;
 }
+
+
+@media print {
+    thead {
+        display: table-header-group;
+    }
+
+    tbody {
+        display: table-row-group;
+    }
+
+    thead.print-hide {
+        display: none;
+    }
+}
