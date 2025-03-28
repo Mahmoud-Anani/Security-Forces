@@ -9,7 +9,7 @@ const Copyright: React.FC = () => {
   return (
     <footer
       style={{ direction: "rtl" }}
-      className={` mx-auto text-center py-3 mt-10 rounded-t-2xl flex justify-center items-center gap-2 w-full font-semibold bg-[#cc696919]`}
+      className={`container mx-auto text-center py-3 mt-10 rounded-t-2xl flex justify-center items-center gap-2 w-full font-semibold bg-[#cc696919]`}
     >
       <p>
         جميع الحقوق محفوظة لدي{" "}

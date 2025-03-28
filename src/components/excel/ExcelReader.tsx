@@ -96,7 +96,7 @@ const ExcelReader: React.FC = () => {
     setDragple(true);
   };
   return (
-    <div className={`px-2 sm:px-0`}>
+    <div className={``}>
       {data.length === 0 && (
         <div
           onDrop={handleDrop}

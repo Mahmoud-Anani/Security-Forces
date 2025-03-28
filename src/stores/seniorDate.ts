@@ -36,4 +36,8 @@ export const rowsDataState = atom({
   key: "rowsDataState",
   default: [],
 });
+export const dataSelectedState = atom({
+  key: "dataSelectedState",
+  default: [],
+});
 export { nameSSFState, SeniorDataErrors, sidebarState };

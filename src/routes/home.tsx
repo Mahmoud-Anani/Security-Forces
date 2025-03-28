@@ -67,9 +67,10 @@ function Home() {
 
       <div className="flex flex-col gap-5 items-center">
         <h1
+          style={{ fontFamily: "Aref Ruqaa" }}
           className={`text-2xl p-2 font-semibold border-b-4 border-[#cc6969] hover:border-[#8eb79a] duration-200 rounded-b-2xl `}
         >
-          للأستعلام السريع
+          لـلأســتــعـــلام الــســريــع
         </h1>
         <div className="w-full ">
           <ExcelReader />

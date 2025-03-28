@@ -1,7 +1,7 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
 import { memo, useEffect, useState } from "react";
-import { rowsDataState } from "../../stores/seniorDate";
+import { dataSelectedState, rowsDataState } from "../../stores/seniorDate";
 import { useRecoilState } from "recoil";
 
 const paginationModel = { page: 0, pageSize: 12 };
@@ -9,6 +9,7 @@ const paginationModel = { page: 0, pageSize: 12 };
 function ViewDataExcel({ data }: any) {
   const [columns, setColumns] = useState<GridColDef[]>([]);
   const [rows, setRows] = useRecoilState(rowsDataState);
+  const [, setDataSelected] = useRecoilState(dataSelectedState);
   const [filteredRows, setFilteredRows] = useState<any[]>([]);
   const [filters, setFilters] = useState<{ [key: string]: string }>({});
   const [isInitialized, setIsInitialized] = useState(false);
@@ -127,6 +128,7 @@ function ViewDataExcel({ data }: any) {
         className="text-right ms-5"
         rows={filteredRows}
         columns={columns}
+        onRowSelectionModelChange={(e) => setDataSelected(e as [])}
         initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[5, 10]}
         checkboxSelection
