@@ -15,6 +15,10 @@ export const linksApp = [
     name: "التحليلات",
     link: "/analysis",
   },
+  {
+    name: "دفع جديد",
+    link: "/add-soldier",
+  },
 ];
 
 export const listSSFs = [
