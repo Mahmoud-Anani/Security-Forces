@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
               <li key={index}>
                 <NavLink
                   to={link.link} // Ensure valid paths in linksApp
-                  className={`hover:text-[#5f2323] hover:underline duration-200`}
+                  className={`hover:text-[#5f2323] whitespace-nowrap hover:underline duration-200`}
                 >
                   {link.name}
                 </NavLink>
