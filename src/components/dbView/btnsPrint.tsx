@@ -1,22 +1,43 @@
 import { Button, ButtonGroup } from "@mui/material";
 import { useRecoilState } from "recoil";
-import { dataSelectedState, rowsDataState } from "../../stores/seniorDate";
+import {
+  dataSelectedState,
+  rowsDataState,
+  visibleColumnsState,
+} from "../../stores/seniorDate";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import Popup from "../utils/popup";
+import { listColumns } from "../../stores/mainData";
 
 function BtnsPrint() {
   const [dataSelected] = useRecoilState(dataSelectedState);
   const [rows] = useRecoilState(rowsDataState);
   const [dataState, setDataState] = useState([]);
+  const [visibleColumns] = useRecoilState<string[]>(visibleColumnsState);
+  const [coulmnsPrintState, setCoulmnsPrintState] = useState<string[]>([]);
+
+  console.log("coulmnsPrintState", coulmnsPrintState);
   // console.log("dataSelected", dataSelected); [0,1,2,4,8]
   // console.log("rows", rows);[{row}]
 
-  const contentRef = useRef<HTMLTableElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  // const contentRefAnyCoulmns = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useReactToPrint({ contentRef });
+
+  // const reactToPrintFnCoulmns = useReactToPrint({
+  //   content: contentRefAnyCoulmns.current,
+  // });
 
   useEffect(() => {
     const dataPrint = dataSelected.map((index) => rows[index]);
+
+    const coulmnsPrint = visibleColumns
+      .map((index) => listColumns[+index])
+      .filter(Boolean);
+
+    setCoulmnsPrintState(coulmnsPrint);
+
     setDataState(() => [...dataPrint]);
   }, [dataSelected, rows]);
 
@@ -29,6 +50,7 @@ function BtnsPrint() {
     `كــشــف     بــتــاريــخ ${currentYearMonthDayAR}م`
   );
   const [enterSheetName, setEnterSheetName] = useState<boolean>(false);
+  const [isOnlyNames, setIsOnlyNames] = useState<boolean>(true);
 
   const handleSheetNameChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,14 +63,16 @@ function BtnsPrint() {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       reactToPrintFn();
+
       setEnterSheetName(false);
     },
-    [setValue, setEnterSheetName]
+    [setValue, setEnterSheetName, setIsOnlyNames]
   );
-
+  const [closeNote, setCloseNote] = useState(true);
   return (
     <>
       <div className={`absolute top-0 left-[200vw] -z-10`}>
+        {/* Prinet Only Name */}
         <div
           ref={contentRef}
           className={`p-5 `}
@@ -67,14 +91,7 @@ function BtnsPrint() {
               textAlign: "center",
             }}
           >
-            <thead className={`text-[36px]`}>
-              {/* <th className={`border border-black`}>م</th>
-          <th className={`border border-black`}>الأســــــــم</th> */}
-              <th className={`border border-black hidden px-2`}>م</th>
-              <th className={`border border-black hidden px-2`}>
-                الأســــــــم
-              </th>
-            </thead>
+            <thead className={`text-[36px]`}></thead>
             <tbody>
               <tr>
                 <td
@@ -82,25 +99,48 @@ function BtnsPrint() {
                 >
                   م
                 </td>
-                <td
-                  className={`text-center font-bold text-2xl border-x border-black px-2 w-[93%]`}
-                >
-                  الأســــــــم
-                </td>
+                {isOnlyNames ? (
+                  <td
+                    className={`text-center font-bold text-2xl border-x border-black px-2 w-[93%]`}
+                  >
+                    الأســــــــم
+                  </td>
+                ) : (
+                  coulmnsPrintState.map((row, index) => (
+                    <td
+                      key={index}
+                      className={`text-center font-bold text-2xl border-x border-black px-2 w-[93%]`}
+                    >
+                      {row}
+                    </td>
+                  ))
+                )}
               </tr>
               {dataState.map((row, index) => (
                 <tr key={index} className={`text-[26px]`}>
                   <td className={`border border-black px-2 w-[7%]`}>
                     {index + 1}
                   </td>
-                  <td className={`border border-black px-2 w-[93%]`}>
-                    {row[1]}
-                  </td>
+                  {isOnlyNames ? (
+                    <td className={`border border-black px-2 w-[93%]`}>
+                      {row[1]}
+                    </td>
+                  ) : (
+                    visibleColumns.map((indexText, colIndex) => (
+                      <td
+                        key={colIndex}
+                        className={`border border-black px-2 w-[93%]`}
+                      >
+                        {row[`${indexText}`] || ""}
+                      </td>
+                    ))
+                  )}
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        {/* Prinet Any Coulmns */}
       </div>
       <ButtonGroup
         className={`flex gap-1 w-full justify-between`}
@@ -114,6 +154,7 @@ function BtnsPrint() {
             // @ts-ignore
             inputRef.current?.focus();
             setEnterSheetName(true);
+            setIsOnlyNames(true);
           }}
         >
           طـبـاعـة كــشــف اســمـاء فــقــط
@@ -121,12 +162,45 @@ function BtnsPrint() {
         <Button
           className={`w-full !text-[20px] !bg-[#c27272df] !border-0 !rounded-none !rounded-l-[5px]`}
           disabled={!(dataSelected.length > 0)}
+          onClick={() => {
+            // @ts-ignore
+            inputRef.current?.focus();
+            setEnterSheetName(true);
+            setIsOnlyNames(false);
+          }}
         >
           طـبـاعـة حــســب الــجــدول
         </Button>
         {/* <Button className={`w-full !text-[20px] !bg-[#c27272df] !border-0 !rounded-none !rounded-l-[5px]`}>Three</Button> */}
       </ButtonGroup>
-
+      <div
+        className={`bg-[#ad686a52] ${
+          !closeNote && "hidden"
+        } w-full p-2 rounded-sm relative`}
+      >
+        <button
+          className={`absolute top-0 left-0 p-2 text-[#ffffff] hover:text-[#b97a7c] cursor-pointer duration-200`}
+          onClick={() => setCloseNote(false)}
+          type="button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
+        </button>
+        <h5 className="text-[18px]">عند الطباعة حسب الجدول</h5>
+        <p className="mt-2">قم بتحديد الاعمدة اولا ثم اختر العناصر</p>
+      </div>
       <Popup
         isVisible={enterSheetName}
         title="ادخل اسم االكشف"

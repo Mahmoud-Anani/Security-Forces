@@ -31,13 +31,16 @@ export const enterPasswordAppState = atom({
   default: false,
 });
 
-
 export const rowsDataState = atom({
   key: "rowsDataState",
   default: [],
 });
 export const dataSelectedState = atom({
   key: "dataSelectedState",
+  default: [],
+});
+export const visibleColumnsState = atom<string[]>({
+  key: "visibleColumnsState",
   default: [],
 });
 export { nameSSFState, SeniorDataErrors, sidebarState };

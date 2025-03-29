@@ -1,13 +1,30 @@
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, useGridApiRef } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
 import { memo, useEffect, useState } from "react";
-import { dataSelectedState, rowsDataState } from "../../stores/seniorDate";
+import { dataSelectedState, rowsDataState, visibleColumnsState } from "../../stores/seniorDate";
 import { useRecoilState } from "recoil";
 
 const paginationModel = { page: 0, pageSize: 12 };
 
 function ViewDataExcel({ data }: any) {
   const [columns, setColumns] = useState<GridColDef[]>([]);
+  const apiRef = useGridApiRef();
+  const [, setVisibleColumns] = useRecoilState<string[]>(visibleColumnsState);
+
+  useEffect(() => {
+    if (apiRef.current) {
+      const updateVisibleColumns = () => {
+        const columns = apiRef.current
+          .getVisibleColumns()
+          .map((col) => col.field);
+        setVisibleColumns(columns);
+      };
+
+      updateVisibleColumns();
+
+      apiRef.current.subscribeEvent("stateChange", updateVisibleColumns);
+    }
+  }, [apiRef, setVisibleColumns]);
   const [rows, setRows] = useRecoilState(rowsDataState);
   const [, setDataSelected] = useRecoilState(dataSelectedState);
   const [filteredRows, setFilteredRows] = useState<any[]>([]);
@@ -129,6 +146,8 @@ function ViewDataExcel({ data }: any) {
         rows={filteredRows}
         columns={columns}
         onRowSelectionModelChange={(e) => setDataSelected(e as [])}
+        // need log columns visible
+        apiRef={apiRef}
         initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[5, 10]}
         checkboxSelection
