@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { ColumnData } from "./mainData";
 
 // Popup
 const nameSSFState = atom({
@@ -41,6 +42,10 @@ export const dataSelectedState = atom({
 });
 export const visibleColumnsState = atom<string[]>({
   key: "visibleColumnsState",
+  default: [],
+});
+export const addedSoldiersState = atom<ColumnData[]>({
+  key: "addedSoldiersState",
   default: [],
 });
 export { nameSSFState, SeniorDataErrors, sidebarState };

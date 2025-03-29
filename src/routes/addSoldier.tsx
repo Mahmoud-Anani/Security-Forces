@@ -1,45 +1,30 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { listSSFs } from "../stores/mainData"; // Import listSSFs
-
-export interface ColumnData {
-  id: string; // "م" @autoincrement
-  name: string; // "الاسم"
-  company: string; // "السرية" !
-  serviceLocation: string; // "جهة قضاء الخدمة"
-  recruitmentDate: string | Date; // "تاريخ التجنيد"
-  qualificationType: string; // "نوع المؤهل"
-  reserveType: string; // "نوع الرديف"
-  policeNumber: string; // "رقم الشرطة"
-  governorate: string; // "المحافظة" !
-  residence: string; // "محل الإقامة"
-  nationalId: string; // "الرقم القومي"
-  tripleNumber: string; // "الرقم الثلاثي"
-  operation: string; // "التشغيل"
-  reserve: string; // "الرديف"
-  securityForces: string; // "سرايا قسم قوات امن العاشر"
-  rank: string; // "الرتبة"
-  weaponRestriction: string; // "منع من حمل السلاح"
-  assignedWork: string; // "العمل المسند اليه"  !
-  college: string; // "الكلية"
-  profession: string; // "الصنعه"
-  notes: string; // "الملاحظات"
-  decisionDate: string | Date; // "تاريخ القرار" !
-  religion: string; // "الديانة"
-  vacationPlans: string; // "خطط الاجازات"
-  len: number; // "LEN"
-  recommendations: string; // "التوصيات"
-  details: string; // "التفاصيل"
-}
+import { ColumnData, listSSFs, soldier } from "../stores/mainData"; // Import listSSFs
+import { useRecoilState } from "recoil";
+import { addedSoldiersState } from "../stores/seniorDate";
+import AddedSoldierUI from "../components/addSoldier/addedSoldierUI";
+import { toast } from "react-toastify";
 
 function AddSoldier() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ColumnData>();
-
+  const [addedSoldiers, setAddedSoldiers] = useRecoilState(addedSoldiersState);
   const onSubmit: SubmitHandler<ColumnData> = (data) => {
-    console.log(data);
+    const isNameAlrydeInserted = addedSoldiers.some(
+      (soldier) =>
+        soldier.name === data.name && soldier.nationalId === data.nationalId
+    );
+    if (isNameAlrydeInserted) {
+      toast.error("تــمــت أضــافــة هــذا الــجــنــد");
+      return;
+    }
+    const religion = data.religion === "مسلم" ? "" : data.religion;
+    setAddedSoldiers((prive) => [...prive, { ...soldier, ...data, religion, id: addedSoldiers.length + 1 }]);
+    reset();
   };
 
   return (
@@ -207,12 +192,13 @@ function AddSoldier() {
         <div className="col-span-2">
           <button
             type="submit"
-            className="w-full text-3xl !bg-[#c27272df] !border-0 rounded-[5px] cursor-pointer py-2"
+            className="w-full text-3xl !bg-[#c27272df] hover:!bg-[#c27272b6] duration-200 !border-0 rounded-[5px] cursor-pointer py-2"
           >
             إرسال
           </button>
         </div>
       </form>
+      <AddedSoldierUI />
     </div>
   );
 }
