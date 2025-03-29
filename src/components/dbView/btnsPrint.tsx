@@ -17,17 +17,23 @@ function BtnsPrint() {
   const [visibleColumns] = useRecoilState<string[]>(visibleColumnsState);
   const [coulmnsPrintState, setCoulmnsPrintState] = useState<string[]>([]);
 
-  console.log("coulmnsPrintState", coulmnsPrintState);
+  // console.log("coulmnsPrintState", coulmnsPrintState);
   // console.log("dataSelected", dataSelected); [0,1,2,4,8]
   // console.log("rows", rows);[{row}]
 
-  const contentRef = useRef<HTMLDivElement>(null);
-  // const contentRefAnyCoulmns = useRef<HTMLDivElement>(null);
-  const reactToPrintFn = useReactToPrint({ contentRef });
+  const currentYearMonthDayAR = new Date().toLocaleString("ar-EG", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+  const [value, setValue] = useState<string>(
+    `كــشــف     بــتــاريــخ ${currentYearMonthDayAR}م`
+  );
 
-  // const reactToPrintFnCoulmns = useReactToPrint({
-  //   content: contentRefAnyCoulmns.current,
-  // });
+  const contentRef = useRef<HTMLDivElement>(null);
+  const reactToPrintFn = useReactToPrint({
+    contentRef,
+  });
 
   useEffect(() => {
     const dataPrint = dataSelected.map((index) => rows[index]);
@@ -41,14 +47,6 @@ function BtnsPrint() {
     setDataState(() => [...dataPrint]);
   }, [dataSelected, rows]);
 
-  const currentYearMonthDayAR = new Date().toLocaleString("ar-EG", {
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-  });
-  const [value, setValue] = useState<string>(
-    `كــشــف     بــتــاريــخ ${currentYearMonthDayAR}م`
-  );
   const [enterSheetName, setEnterSheetName] = useState<boolean>(false);
   const [isOnlyNames, setIsOnlyNames] = useState<boolean>(true);
 
@@ -80,7 +78,10 @@ function BtnsPrint() {
             width: "100%",
           }}
         >
-          <h1 className="border font-extrabold border-black bg-[#00000007] text-center text-3xl p-5">
+          <h1
+            style={{ fontFamily: "Aref Ruqaa" }}
+            className="border font-extrabold border-black bg-[#00000020] text-center text-3xl p-5"
+          >
             {value}
           </h1>
 
@@ -93,7 +94,7 @@ function BtnsPrint() {
           >
             <thead className={`text-[36px]`}></thead>
             <tbody>
-              <tr>
+              <tr className="border border-black bg-[#00000020]">
                 <td
                   className={`text-center font-bold text-2xl border-x border-black p-2 w-[7%] `}
                 >
@@ -101,7 +102,7 @@ function BtnsPrint() {
                 </td>
                 {isOnlyNames ? (
                   <td
-                    className={`text-center font-bold text-2xl border-x border-black px-2 w-[93%]`}
+                    className={`text-center font-bold text-2xl border-x border-black px-2 w-fit`}
                   >
                     الأســــــــم
                   </td>
@@ -109,7 +110,7 @@ function BtnsPrint() {
                   coulmnsPrintState.map((row, index) => (
                     <td
                       key={index}
-                      className={`text-center font-bold text-2xl border-x border-black px-2 w-[93%]`}
+                      className={`text-center font-bold text-2xl border-x border-black px-2 w-fit`}
                     >
                       {row}
                     </td>
@@ -117,21 +118,28 @@ function BtnsPrint() {
                 )}
               </tr>
               {dataState.map((row, index) => (
-                <tr key={index} className={`text-[26px]`}>
+                <tr key={index} className={`text-[18px]`}>
                   <td className={`border border-black px-2 w-[7%]`}>
                     {index + 1}
                   </td>
                   {isOnlyNames ? (
-                    <td className={`border border-black px-2 w-[93%]`}>
-                      {row[1]}
+                    <td className={`border border-black px-2 w-fit`}>
+                      {`${row[1]}`.split(" ").slice(0, 5).join(" ") || ""}
                     </td>
                   ) : (
                     visibleColumns.map((indexText, colIndex) => (
                       <td
                         key={colIndex}
-                        className={`border border-black px-2 w-[93%]`}
+                        className={`border border-black px-2 w-fit`}
                       >
-                        {row[`${indexText}`] || ""}
+                        {indexText == "1"
+                          ? `${row[`${indexText}`]}`
+                              .split(" ")
+                              .slice(0, 5)
+                              .join(" ")
+                          : indexText == "20"
+                          ? ""
+                          : row[`${indexText}`]}
                       </td>
                     ))
                   )}
@@ -174,6 +182,7 @@ function BtnsPrint() {
         {/* <Button className={`w-full !text-[20px] !bg-[#c27272df] !border-0 !rounded-none !rounded-l-[5px]`}>Three</Button> */}
       </ButtonGroup>
       <div
+        style={{ fontFamily: "Aref Ruqaa" }}
         className={`bg-[#ad686a52] ${
           !closeNote && "hidden"
         } w-full p-2 rounded-sm relative`}
@@ -198,8 +207,8 @@ function BtnsPrint() {
             />
           </svg>
         </button>
-        <h5 className="text-[18px]">عند الطباعة حسب الجدول</h5>
-        <p className="mt-2">قم بتحديد الاعمدة اولا ثم اختر العناصر</p>
+        <h5 className="text-3xl underline">عند الطباعة حسب الجدول</h5>
+        <p className="mt-2 text-3xl">قم بتحديد الاعمدة اولا ثم اختر المجندين</p>
       </div>
       <Popup
         isVisible={enterSheetName}
