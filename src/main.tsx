@@ -18,9 +18,17 @@ import { BrowserRouter } from "react-router";
 import "react-datepicker/dist/react-datepicker.css";
 import Copyright from "./components/layout/copyright.tsx";
 
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js");
-}
+// import { registerSW } from "virtual:pwa-register";
+
+// Register the service worker
+// const updateSW = registerSW({
+//   onNeedRefresh() {
+//     console.log("New content is available. Please refresh.");
+//   },
+//   onOfflineReady() {
+//     console.log("App is ready to work offline.");
+//   },
+// });
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
