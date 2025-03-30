@@ -5,7 +5,11 @@ import tailwindcss from "@tailwindcss/vite";
 
 const manifestForPlugin: Partial<VitePWAOptions> = {
   registerType: "prompt",
-  includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
+  includeAssets: [
+    "favicon.ico",
+    "android-chrome-512x512.png",
+    "android-chrome-192x192.png",
+  ],
   manifest: {
     name: "Ajwaa | أجواء",
     short_name: "Ajwaa",
