@@ -172,6 +172,7 @@ function AddSoldier() {
             type="text"
             {...register("notes")}
             className="border p-2 w-full"
+            defaultValue={`ضم من معسكر مبارك بتاريخ ${new Date().toLocaleDateString("ar-EG")}م`}
           />
         </div>
 

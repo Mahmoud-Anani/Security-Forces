@@ -1,6 +1,5 @@
 import { useRecoilState } from "recoil";
 import { addedSoldiersState } from "../../stores/seniorDate";
-import { useEffect } from "react";
 import { Paper } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import ExcelJS from "exceljs";
@@ -44,12 +43,17 @@ const columns: GridColDef[] = [
 
 function AddedSoldierUI() {
   const [addedSoldiers] = useRecoilState(addedSoldiersState);
-  console.log(addedSoldiers);
-
+  // console.log(addedSoldiers);
+  if (addedSoldiers.length <= 0) {
+    return null;
+  }
   const handleExport = async () => {
     try {
       const workbook = new ExcelJS.Workbook();
       const worksheet = workbook.addWorksheet("Soldiers");
+
+      // Set worksheet layout to RTL
+      worksheet.views = [{ rightToLeft: true }];
 
       // Define Arabic column headers
       const columnHeaders = [
@@ -91,13 +95,38 @@ function AddedSoldierUI() {
 
       // Add rows to the worksheet
       addedSoldiers.forEach((soldier) => {
-        worksheet.addRow(soldier);
+        const formattedSoldier = {
+          ...soldier,
+          recruitmentDate: `${soldier.recruitmentDate}`?.replace(/-/g, "/"), // Format date
+          decisionDate: `${soldier.decisionDate}`?.replace(/-/g, "/"), // Format date
+        };
+        worksheet.addRow(formattedSoldier);
       });
 
       // Style the header row
       worksheet.getRow(1).eachCell((cell) => {
-        cell.font = { bold: true };
-        cell.alignment = { horizontal: "center" };
+        cell.font = { bold: true, name: "Traditional Arabic", size: 12 }; // Ensure font size is 12px
+        cell.alignment = { horizontal: "center", readingOrder: "rtl" };
+        cell.fill = {
+          type: "pattern",
+          pattern: "solid",
+          fgColor: { argb: "C5D9F1" },
+        };
+      });
+
+      // Style all data rows
+      worksheet.eachRow((row) => {
+        row.eachCell((cell) => {
+          cell.font = { bold: true, name: "Traditional Arabic" }; // Make all text bold
+          cell.alignment = { horizontal: "center", readingOrder: "rtl" };
+          cell.border = {
+            // Add borders to all cells
+            top: { style: "thin" },
+            left: { style: "thin" },
+            bottom: { style: "thin" },
+            right: { style: "thin" },
+          };
+        });
       });
 
       // Generate Excel file and trigger download
@@ -108,8 +137,6 @@ function AddedSoldierUI() {
     }
   };
 
-  useEffect(() => {}, []);
-
   return (
     <>
       <Paper sx={{ width: "100%", overflowX: "auto" }}>
@@ -118,6 +145,8 @@ function AddedSoldierUI() {
           className="text-right ms-5 !text-[18px]"
           rows={addedSoldiers.map((soldier) => ({
             ...soldier,
+            recruitmentDate: `${soldier.recruitmentDate}`?.replace(/-/g, "/"),
+            decisionDate: `${soldier.decisionDate}`?.replace(/-/g, "/"),
           }))}
           columns={columns}
           initialState={{ pagination: { paginationModel } }}
@@ -138,101 +167,3 @@ function AddedSoldierUI() {
 }
 
 export default AddedSoldierUI;
-
-/*
-الترتيب مهم
-
-[
-  {
-    "id": "",
-    "name": "محمود عبد الله عناني غالي السيد",
-    "company": "",
-    "serviceLocation": "",
-    "recruitmentDate": "2025-03-29",
-    "qualificationType": "عليا",
-    "reserveType": "بدون",
-    "policeNumber": "1906",
-    "governorate": "الجيزة",
-    "residence": "م.ميت غمر",
-    "nationalId": "30205281200254",
-    "tripleNumber": "197/197/2002",
-    "operation": "",
-    "reserve": "",
-    "securityForces": "",
-    "rank": "",
-    "weaponRestriction": "",
-    "assignedWork": "",
-    "college": "",
-    "profession": "",
-    "notes": "ضم من مبارك بتاريخ 20/2055/8م",
-    "decisionDate": "",
-    "religion": "مسلم",
-    "vacationPlans": "",
-    "len": "",
-    "recommendations": "",
-    "details": ""
-  }
-]
-
-
-[
-  {
-    "id": "",
-    "name": "محمود عبد الله عناني غالي السيد",
-    "company": "س10",
-    "serviceLocation": "قوات الامن",
-    "recruitmentDate": "2025-03-29",
-    "qualificationType": "عليا",
-    "reserveType": "بدون",
-    "policeNumber": "1906",
-    "governorate": "القاهرة",
-    "residence": "م.ميت غمر",
-    "nationalId": "30205281200254",
-    "tripleNumber": "197/197/2002",
-    "operation": "",
-    "reserve": "",
-    "securityForces": "",
-    "rank": "",
-    "weaponRestriction": "",
-    "assignedWork": "",
-    "college": "",
-    "profession": "",
-    "notes": "ضم من مبارك بتاريخ 20/2055/8م",
-    "decisionDate": "",
-    "religion": "",
-    "vacationPlans": "",
-    "len": "",
-    "recommendations": "",
-    "details": ""
-  },
-  {
-    "id": "",
-    "name": "test",
-    "company": "س10",
-    "serviceLocation": "قوات الامن",
-    "recruitmentDate": "2025-03-13",
-    "qualificationType": "عليا",
-    "reserveType": "بدون",
-    "policeNumber": "1906",
-    "governorate": "القاهرة",
-    "residence": "م.ميت غمر",
-    "nationalId": "30205281200254",
-    "tripleNumber": "197/197/2002",
-    "operation": "",
-    "reserve": "",
-    "securityForces": "",
-    "rank": "",
-    "weaponRestriction": "",
-    "assignedWork": "",
-    "college": "",
-    "profession": "",
-    "notes": "ضم من مبارك بتاريخ 20/2055/8م",
-    "decisionDate": "",
-    "religion": "مسيحي",
-    "vacationPlans": "",
-    "len": "",
-    "recommendations": "",
-    "details": ""
-  }
-]
-  */
