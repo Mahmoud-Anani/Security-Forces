@@ -44,16 +44,7 @@ function AddedSoldierUI() {
   const [addedSoldiers] = useRecoilState(addedSoldiersState);
   console.log(addedSoldiers);
 
-  //   const [rows, setRows] = useState([]);
-
-  useEffect(() => {
-    // Map addedSoldiers to rows for the DataGrid
-    // const rows = addedSoldiers.map((soldier, index) => ({
-    //   id: index + 1, // Assign a unique ID
-    //   ...soldier, // Spread the soldier data
-    // }));
-    // setRows(rows);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -65,9 +56,6 @@ function AddedSoldierUI() {
             ...soldier,
           }))}
           columns={columns}
-          // onRowSelectionModelChange={(e) => setDataSelected(e as [])}
-          // need log columns visible
-          // apiRef={apiRef}
           initialState={{ pagination: { paginationModel } }}
           pageSizeOptions={[5, 10]}
           checkboxSelection

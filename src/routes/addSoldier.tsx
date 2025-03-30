@@ -28,7 +28,7 @@ function AddSoldier() {
   };
 
   return (
-    <div className="container mx-auto my-5 flex flex-col gap-5 items-center">
+    <div className="container mx-auto my-5 sm:px-0 px-2 flex flex-col gap-5 items-center">
       <h1
         style={{ fontFamily: "Aref Ruqaa" }}
         className={`text-2xl p-2 font-semibold border-b-4 border-[#cc6969] hover:border-[#8eb79a] duration-200 rounded-b-2xl `}
@@ -189,14 +189,12 @@ function AddSoldier() {
             <p className="text-red-500">{errors.religion.message}</p>
           )}
         </div>
-        <div className="col-span-2">
-          <button
-            type="submit"
-            className="w-full text-3xl !bg-[#c27272df] hover:!bg-[#c27272b6] duration-200 !border-0 rounded-[5px] cursor-pointer py-2"
-          >
-            إرسال
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="w-full text-3xl !bg-[#c27272df] hover:!bg-[#c27272b6] duration-200 !border-0 rounded-[5px] cursor-pointer py-2"
+        >
+          إرسال
+        </button>
       </form>
       <AddedSoldierUI />
     </div>
