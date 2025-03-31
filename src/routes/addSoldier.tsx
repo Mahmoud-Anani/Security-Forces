@@ -23,7 +23,242 @@ function AddSoldier() {
       return;
     }
     const religion = data.religion === "مسلم" ? "" : data.religion;
-    setAddedSoldiers((prive) => [...prive, { ...soldier, ...data, religion, id: addedSoldiers.length + 1 }]);
+
+    let reserve: string | Date = data.reserve;
+
+    // غير قابلة
+    if (data.reserveType === "غير قابلة") {
+      // دفعة 1
+      if (`${data.recruitmentDate}`.split("-")[1].includes("01")) {
+        switch (data.qualificationType) {
+          case "عليا":
+            reserve = `01/05/${
+              +`${data.recruitmentDate}`.split("-")[0] + 1
+            }`;
+
+            break;
+          case "متوسط":
+            reserve = `01/05/${
+              +`${data.recruitmentDate}`.split("-")[0] + 2
+            }`;
+            break;
+          case "فوق متوسط":
+            reserve = `01/11/${
+              +`${data.recruitmentDate}`.split("-")[0] + 1
+            }`;
+            break;
+
+          default:
+            reserve = `01/05/${
+              +`${data.recruitmentDate}`.split("-")[0] + 3
+            }`;
+            break;
+        }
+
+      }
+      // دفعة 4
+      if (`${data.recruitmentDate}`.split("-")[1].includes("04")) {
+        switch (data.qualificationType) {
+          case "عليا":
+            reserve = `01/08/${
+              +`${data.recruitmentDate}`.split("-")[0] + 1
+            }`;
+            break;
+          case "متوسط":
+            reserve = `01/08/${
+              +`${data.recruitmentDate}`.split("-")[0] + 2
+            }`;
+            break;
+          case "فوق متوسط":
+            reserve = `01/02/${
+              +`${data.recruitmentDate}`.split("-")[0] + 2
+            }`;
+            break;
+
+          default:
+            reserve = `01/08/${
+              +`${data.recruitmentDate}`.split("-")[0] + 3
+            }`;
+            break;
+        }
+      }
+      // دفعة 7
+      if (`${data.recruitmentDate}`.split("-")[1].includes("07")) {
+        switch (data.qualificationType) {
+          case "عليا":
+            reserve = `01/11/${
+              +`${data.recruitmentDate}`.split("-")[0] + 1
+            }`;
+            break;
+          case "متوسط":
+            reserve = `01/11/${
+              +`${data.recruitmentDate}`.split("-")[0] + 2
+            }`;
+            break;
+          case "فوق متوسط":
+            reserve = `01/05/${
+              +`${data.recruitmentDate}`.split("-")[0] + 2
+            }`;
+            break;
+
+          default:
+            reserve = `01/11/${
+              +`${data.recruitmentDate}`.split("-")[0] + 3
+            }`;
+            break;
+        }
+
+      }
+      // دفعة 10
+      if (`${data.recruitmentDate}`.split("-")[1].includes("10")) {
+        switch (data.qualificationType) {
+          case "عليا":
+            reserve = `01/02/${
+              +`${data.recruitmentDate}`.split("-")[0] + 2
+            }`;
+            break;
+          case "متوسط":
+            reserve = `01/02/${
+              +`${data.recruitmentDate}`.split("-")[0] + 3
+            }`;
+            break;
+          case "فوق متوسط":
+            reserve = `01/08/${
+              +`${data.recruitmentDate}`.split("-")[0] + 2
+            }`;
+            break;
+
+          default:
+            reserve = `01/02/${
+              +`${data.recruitmentDate}`.split("-")[0] + 4
+            }`;
+            break;
+        }
+
+      }
+    }
+    // بدون و قابلة
+    // دفعة 1
+    if (`${data.recruitmentDate}`.split("-")[1].includes("01")) {
+      switch (data.qualificationType) {
+        case "عليا":
+          reserve = `01/03/${
+            +`${data.recruitmentDate}`.split("-")[0] + 1
+          }`;
+          break;
+        case "متوسط":
+          reserve = `01/03/${
+            +`${data.recruitmentDate}`.split("-")[0] + 2
+          }`;
+          break;
+        case "فوق متوسط":
+          reserve = `01/09/${
+            +`${data.recruitmentDate}`.split("-")[0] + 1
+          }`;
+          break;
+
+        default:
+          reserve = `01/03/${
+            +`${data.recruitmentDate}`.split("-")[0] + 3
+          }`;
+          break;
+      }
+
+    }
+    // دفعة 4
+    if (`${data.recruitmentDate}`.split("-")[1].includes("04")) {
+      switch (data.qualificationType) {
+        case "عليا":
+          reserve = `01/06/${
+            +`${data.recruitmentDate}`.split("-")[0] + 1
+          }`;
+          break;
+        case "متوسط":
+          reserve = `01/06/${
+            +`${data.recruitmentDate}`.split("-")[0] + 2
+          }`;
+          break;
+        case "فوق متوسط":
+          reserve = `01/12/${
+            +`${data.recruitmentDate}`.split("-")[0] + 1
+          }`;
+          break;
+
+        default:
+          reserve = `01/06/${
+            +`${data.recruitmentDate}`.split("-")[0] + 3
+          }`;
+          break;
+      }
+
+    }
+    // دفعة 7
+    if (`${data.recruitmentDate}`.split("-")[1].includes("07")) {
+      switch (data.qualificationType) {
+        case "عليا":
+          reserve = `01/09/${
+            +`${data.recruitmentDate}`.split("-")[0] + 1
+          }`;
+          break;
+        case "متوسط":
+          reserve = `01/09/${
+            +`${data.recruitmentDate}`.split("-")[0] + 2
+          }`;
+          break;
+        case "فوق متوسط":
+          reserve = `01/03/${
+            +`${data.recruitmentDate}`.split("-")[0] + 2
+          }`;
+          break;
+
+        default:
+          reserve = `01/09/${
+            +`${data.recruitmentDate}`.split("-")[0] + 3
+          }`;
+          break;
+      }
+
+    }
+    // دفعة 10
+    if (`${data.recruitmentDate}`.split("-")[1].includes("10")) {
+      switch (data.qualificationType) {
+        case "عليا":
+          reserve = `01/12/${
+            +`${data.recruitmentDate}`.split("-")[0] + 1
+          }`;
+          break;
+        case "متوسط":
+          reserve = `01/12/${
+            +`${data.recruitmentDate}`.split("-")[0] + 2
+          }`;
+          break;
+        case "فوق متوسط":
+          reserve = `01/06/${
+            +`${data.recruitmentDate}`.split("-")[0] + 2
+          }`;
+          break;
+
+        default:
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          reserve = `01/12/${
+            +`${data.recruitmentDate}`.split("-")[0] + 3
+          }`;
+          break;
+      }
+
+    }
+
+    setAddedSoldiers((prive) => [
+      ...prive,
+      {
+        ...soldier,
+        ...data,
+        religion,
+        reserve ,
+        id: addedSoldiers.length + 1,
+      },
+    ]); // reserve
+    
     reset();
   };
 
@@ -172,7 +407,9 @@ function AddSoldier() {
             type="text"
             {...register("notes")}
             className="border p-2 w-full"
-            defaultValue={`ضم من معسكر مبارك بتاريخ ${new Date().toLocaleDateString("ar-EG")}م`}
+            defaultValue={`ضم من معسكر مبارك بتاريخ ${new Date().toLocaleDateString(
+              "ar-EG"
+            )}م`}
           />
         </div>
 

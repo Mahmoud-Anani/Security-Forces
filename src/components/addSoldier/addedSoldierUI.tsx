@@ -43,7 +43,7 @@ const columns: GridColDef[] = [
 
 function AddedSoldierUI() {
   const [addedSoldiers] = useRecoilState(addedSoldiersState);
-  // console.log(addedSoldiers);
+  console.log(addedSoldiers);
   if (addedSoldiers.length <= 0) {
     return null;
   }
@@ -98,6 +98,7 @@ function AddedSoldierUI() {
         const formattedSoldier = {
           ...soldier,
           recruitmentDate: `${soldier.recruitmentDate}`?.replace(/-/g, "/"), // Format date
+          reserve: `${soldier.recruitmentDate}`?.replace(/-/g, "/"), // Format date
           decisionDate: `${soldier.decisionDate}`?.replace(/-/g, "/"), // Format date
         };
         worksheet.addRow(formattedSoldier);
@@ -146,6 +147,7 @@ function AddedSoldierUI() {
           rows={addedSoldiers.map((soldier) => ({
             ...soldier,
             recruitmentDate: `${soldier.recruitmentDate}`?.replace(/-/g, "/"),
+            reserve: `${soldier.recruitmentDate}`?.replace(/-/g, "/"),
             decisionDate: `${soldier.decisionDate}`?.replace(/-/g, "/"),
           }))}
           columns={columns}
