@@ -32,53 +32,36 @@ function AddSoldier() {
       if (`${data.recruitmentDate}`.split("-")[1].includes("01")) {
         switch (data.qualificationType) {
           case "عليا":
-            reserve = `01/05/${
-              +`${data.recruitmentDate}`.split("-")[0] + 1
-            }`;
+            reserve = `01/05/${+`${data.recruitmentDate}`.split("-")[0] + 1}`;
 
             break;
           case "متوسط":
-            reserve = `01/05/${
-              +`${data.recruitmentDate}`.split("-")[0] + 2
-            }`;
+            reserve = `01/05/${+`${data.recruitmentDate}`.split("-")[0] + 2}`;
             break;
           case "فوق متوسط":
-            reserve = `01/11/${
-              +`${data.recruitmentDate}`.split("-")[0] + 1
-            }`;
+            reserve = `01/11/${+`${data.recruitmentDate}`.split("-")[0] + 1}`;
             break;
 
           default:
-            reserve = `01/05/${
-              +`${data.recruitmentDate}`.split("-")[0] + 3
-            }`;
+            reserve = `01/05/${+`${data.recruitmentDate}`.split("-")[0] + 3}`;
             break;
         }
-
       }
       // دفعة 4
       if (`${data.recruitmentDate}`.split("-")[1].includes("04")) {
         switch (data.qualificationType) {
           case "عليا":
-            reserve = `01/08/${
-              +`${data.recruitmentDate}`.split("-")[0] + 1
-            }`;
+            reserve = `01/08/${+`${data.recruitmentDate}`.split("-")[0] + 1}`;
             break;
           case "متوسط":
-            reserve = `01/08/${
-              +`${data.recruitmentDate}`.split("-")[0] + 2
-            }`;
+            reserve = `01/08/${+`${data.recruitmentDate}`.split("-")[0] + 2}`;
             break;
           case "فوق متوسط":
-            reserve = `01/02/${
-              +`${data.recruitmentDate}`.split("-")[0] + 2
-            }`;
+            reserve = `01/02/${+`${data.recruitmentDate}`.split("-")[0] + 2}`;
             break;
 
           default:
-            reserve = `01/08/${
-              +`${data.recruitmentDate}`.split("-")[0] + 3
-            }`;
+            reserve = `01/08/${+`${data.recruitmentDate}`.split("-")[0] + 3}`;
             break;
         }
       }
@@ -86,55 +69,37 @@ function AddSoldier() {
       if (`${data.recruitmentDate}`.split("-")[1].includes("07")) {
         switch (data.qualificationType) {
           case "عليا":
-            reserve = `01/11/${
-              +`${data.recruitmentDate}`.split("-")[0] + 1
-            }`;
+            reserve = `01/11/${+`${data.recruitmentDate}`.split("-")[0] + 1}`;
             break;
           case "متوسط":
-            reserve = `01/11/${
-              +`${data.recruitmentDate}`.split("-")[0] + 2
-            }`;
+            reserve = `01/11/${+`${data.recruitmentDate}`.split("-")[0] + 2}`;
             break;
           case "فوق متوسط":
-            reserve = `01/05/${
-              +`${data.recruitmentDate}`.split("-")[0] + 2
-            }`;
+            reserve = `01/05/${+`${data.recruitmentDate}`.split("-")[0] + 2}`;
             break;
 
           default:
-            reserve = `01/11/${
-              +`${data.recruitmentDate}`.split("-")[0] + 3
-            }`;
+            reserve = `01/11/${+`${data.recruitmentDate}`.split("-")[0] + 3}`;
             break;
         }
-
       }
       // دفعة 10
       if (`${data.recruitmentDate}`.split("-")[1].includes("10")) {
         switch (data.qualificationType) {
           case "عليا":
-            reserve = `01/02/${
-              +`${data.recruitmentDate}`.split("-")[0] + 2
-            }`;
+            reserve = `01/02/${+`${data.recruitmentDate}`.split("-")[0] + 2}`;
             break;
           case "متوسط":
-            reserve = `01/02/${
-              +`${data.recruitmentDate}`.split("-")[0] + 3
-            }`;
+            reserve = `01/02/${+`${data.recruitmentDate}`.split("-")[0] + 3}`;
             break;
           case "فوق متوسط":
-            reserve = `01/08/${
-              +`${data.recruitmentDate}`.split("-")[0] + 2
-            }`;
+            reserve = `01/08/${+`${data.recruitmentDate}`.split("-")[0] + 2}`;
             break;
 
           default:
-            reserve = `01/02/${
-              +`${data.recruitmentDate}`.split("-")[0] + 4
-            }`;
+            reserve = `01/02/${+`${data.recruitmentDate}`.split("-")[0] + 4}`;
             break;
         }
-
       }
     }
     // بدون و قابلة
@@ -142,110 +107,74 @@ function AddSoldier() {
     if (`${data.recruitmentDate}`.split("-")[1].includes("01")) {
       switch (data.qualificationType) {
         case "عليا":
-          reserve = `01/03/${
-            +`${data.recruitmentDate}`.split("-")[0] + 1
-          }`;
+          reserve = `01/03/${+`${data.recruitmentDate}`.split("-")[0] + 1}`;
           break;
         case "متوسط":
-          reserve = `01/03/${
-            +`${data.recruitmentDate}`.split("-")[0] + 2
-          }`;
+          reserve = `01/03/${+`${data.recruitmentDate}`.split("-")[0] + 2}`;
           break;
         case "فوق متوسط":
-          reserve = `01/09/${
-            +`${data.recruitmentDate}`.split("-")[0] + 1
-          }`;
+          reserve = `01/09/${+`${data.recruitmentDate}`.split("-")[0] + 1}`;
           break;
 
         default:
-          reserve = `01/03/${
-            +`${data.recruitmentDate}`.split("-")[0] + 3
-          }`;
+          reserve = `01/03/${+`${data.recruitmentDate}`.split("-")[0] + 3}`;
           break;
       }
-
     }
     // دفعة 4
     if (`${data.recruitmentDate}`.split("-")[1].includes("04")) {
       switch (data.qualificationType) {
         case "عليا":
-          reserve = `01/06/${
-            +`${data.recruitmentDate}`.split("-")[0] + 1
-          }`;
+          reserve = `01/06/${+`${data.recruitmentDate}`.split("-")[0] + 1}`;
           break;
         case "متوسط":
-          reserve = `01/06/${
-            +`${data.recruitmentDate}`.split("-")[0] + 2
-          }`;
+          reserve = `01/06/${+`${data.recruitmentDate}`.split("-")[0] + 2}`;
           break;
         case "فوق متوسط":
-          reserve = `01/12/${
-            +`${data.recruitmentDate}`.split("-")[0] + 1
-          }`;
+          reserve = `01/12/${+`${data.recruitmentDate}`.split("-")[0] + 1}`;
           break;
 
         default:
-          reserve = `01/06/${
-            +`${data.recruitmentDate}`.split("-")[0] + 3
-          }`;
+          reserve = `01/06/${+`${data.recruitmentDate}`.split("-")[0] + 3}`;
           break;
       }
-
     }
     // دفعة 7
     if (`${data.recruitmentDate}`.split("-")[1].includes("07")) {
       switch (data.qualificationType) {
         case "عليا":
-          reserve = `01/09/${
-            +`${data.recruitmentDate}`.split("-")[0] + 1
-          }`;
+          reserve = `01/09/${+`${data.recruitmentDate}`.split("-")[0] + 1}`;
           break;
         case "متوسط":
-          reserve = `01/09/${
-            +`${data.recruitmentDate}`.split("-")[0] + 2
-          }`;
+          reserve = `01/09/${+`${data.recruitmentDate}`.split("-")[0] + 2}`;
           break;
         case "فوق متوسط":
-          reserve = `01/03/${
-            +`${data.recruitmentDate}`.split("-")[0] + 2
-          }`;
+          reserve = `01/03/${+`${data.recruitmentDate}`.split("-")[0] + 2}`;
           break;
 
         default:
-          reserve = `01/09/${
-            +`${data.recruitmentDate}`.split("-")[0] + 3
-          }`;
+          reserve = `01/09/${+`${data.recruitmentDate}`.split("-")[0] + 3}`;
           break;
       }
-
     }
     // دفعة 10
     if (`${data.recruitmentDate}`.split("-")[1].includes("10")) {
       switch (data.qualificationType) {
         case "عليا":
-          reserve = `01/12/${
-            +`${data.recruitmentDate}`.split("-")[0] + 1
-          }`;
+          reserve = `01/12/${+`${data.recruitmentDate}`.split("-")[0] + 1}`;
           break;
         case "متوسط":
-          reserve = `01/12/${
-            +`${data.recruitmentDate}`.split("-")[0] + 2
-          }`;
+          reserve = `01/12/${+`${data.recruitmentDate}`.split("-")[0] + 2}`;
           break;
         case "فوق متوسط":
-          reserve = `01/06/${
-            +`${data.recruitmentDate}`.split("-")[0] + 2
-          }`;
+          reserve = `01/06/${+`${data.recruitmentDate}`.split("-")[0] + 2}`;
           break;
 
         default:
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          reserve = `01/12/${
-            +`${data.recruitmentDate}`.split("-")[0] + 3
-          }`;
+          reserve = `01/12/${+`${data.recruitmentDate}`.split("-")[0] + 3}`;
           break;
       }
-
     }
 
     setAddedSoldiers((prive) => [
@@ -254,11 +183,11 @@ function AddSoldier() {
         ...soldier,
         ...data,
         religion,
-        reserve ,
+        reserve,
         id: addedSoldiers.length + 1,
       },
     ]); // reserve
-    
+
     reset();
   };
 
@@ -427,6 +356,46 @@ function AddSoldier() {
             <p className="text-red-500">{errors.religion.message}</p>
           )}
         </div>
+        <div>
+          <label className="block font-medium">رقم التليفون</label>
+          <input
+            type="text"
+            {...register("phoneNumber", {
+              required: "رقم التليفون مطلوب",
+              pattern: {
+                value: /^\d{11}$/, // Ensure exactly 11 digits
+                message: "يجب أن يكون رقم التليفون مكونًا من 11 رقمًا",
+              },
+            })}
+            className="border p-2 w-full"
+            maxLength={11} // Limit to 11 digits
+            minLength={11} // Ensure at least 11 digits
+            placeholder="01111111111" // Placeholder for phone number
+          />
+          {errors.phoneNumber && (
+            <p className="text-red-500">{errors.phoneNumber.message}</p>
+          )}
+        </div>
+        <div>
+          <label className="block font-medium">رقم تليفون الوالد</label>
+          <input
+            type="text"
+            {...register("phoneNumber2", {
+              pattern: {
+                value: /^\d{11}$/, // Ensure exactly 11 digits
+                message: "يجب أن يكون رقم التليفون مكونًا من 11 رقمًا",
+              },
+            })}
+            className="border p-2 w-full"
+            maxLength={11} // Limit to 11 digits
+            minLength={11} // Ensure at least 11 digits
+            placeholder="01111111111" // Placeholder for phone number
+          />
+          {errors.phoneNumber2 && (
+            <p className="text-red-500">{errors.phoneNumber2.message}</p>
+          )}
+        </div>
+
         <button
           type="submit"
           className="w-full text-3xl !bg-[#c27272df] hover:!bg-[#c27272b6] duration-200 !border-0 rounded-[5px] cursor-pointer py-2"

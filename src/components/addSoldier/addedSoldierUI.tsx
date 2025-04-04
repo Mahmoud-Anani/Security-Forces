@@ -39,11 +39,13 @@ const columns: GridColDef[] = [
   { field: "len", headerName: "LEN", width: 100 },
   { field: "recommendations", headerName: "التوصيات", width: 200 },
   { field: "details", headerName: "التفاصيل", width: 200 },
+  { headerName: "رقم التليفون", field: "phoneNumber", width: 200 },
+  { headerName: "رقم ولي الأمر", field: "phoneNumber2", width: 200 },
 ];
 
 function AddedSoldierUI() {
   const [addedSoldiers] = useRecoilState(addedSoldiersState);
-  console.log(addedSoldiers);
+  // console.log(addedSoldiers);
   if (addedSoldiers.length <= 0) {
     return null;
   }
@@ -88,6 +90,8 @@ function AddedSoldierUI() {
         { header: "LEN", key: "len", width: 10 },
         { header: "التوصيات", key: "recommendations", width: 20 },
         { header: "التفاصيل", key: "details", width: 20 },
+        { header: "رقم التليفون", key: "phoneNumber", width: 20 },
+        { header: "رقم ولي الأمر", key: "phoneNumber2", width: 20 },
       ];
 
       // Set worksheet columns
@@ -98,7 +102,7 @@ function AddedSoldierUI() {
         const formattedSoldier = {
           ...soldier,
           recruitmentDate: `${soldier.recruitmentDate}`?.replace(/-/g, "/"), // Format date
-          reserve: `${soldier.recruitmentDate}`?.replace(/-/g, "/"), // Format date
+          reserve: `${soldier.reserve}`?.replace(/-/g, "/"), // Format date
           decisionDate: `${soldier.decisionDate}`?.replace(/-/g, "/"), // Format date
         };
         worksheet.addRow(formattedSoldier);
@@ -146,9 +150,10 @@ function AddedSoldierUI() {
           className="text-right ms-5 !text-[18px]"
           rows={addedSoldiers.map((soldier) => ({
             ...soldier,
-            recruitmentDate: `${soldier.recruitmentDate}`?.replace(/-/g, "/"),
-            reserve: `${soldier.recruitmentDate}`?.replace(/-/g, "/"),
-            decisionDate: `${soldier.decisionDate}`?.replace(/-/g, "/"),
+            recruitmentDate: `${soldier.recruitmentDate}`,
+
+            reserve: soldier.reserve,
+            decisionDate: `${soldier.decisionDate}`,
           }))}
           columns={columns}
           initialState={{ pagination: { paginationModel } }}

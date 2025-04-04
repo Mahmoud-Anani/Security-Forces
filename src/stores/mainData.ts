@@ -110,6 +110,8 @@ export const soldier: ColumnData = {
   len: "",
   recommendations: "",
   details: "",
+  phoneNumber: "",
+  phoneNumber2: "",
 };
 
 export interface ColumnData {
@@ -140,4 +142,6 @@ export interface ColumnData {
   len: string; // "LEN"
   recommendations: string; // "التوصيات"
   details: string; // "التفاصيل"
+  phoneNumber?: string; // "رقم التليفون"
+  phoneNumber2?: string; // "رقم ولي الأمر"
 }

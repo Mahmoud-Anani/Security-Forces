@@ -45,7 +45,7 @@ function Home() {
         setEnterPasswordApp(false);
         // set cookie
 
-        Cookies.set("auth", "true", { expires: 0.25 }); // 1 day
+        Cookies.set("auth", "true", { expires: 0.17 }); // .17 = 4.08 hour, 1 = day
       } else {
         toast.error("كلمة المرور غير صحيحة");
       }
