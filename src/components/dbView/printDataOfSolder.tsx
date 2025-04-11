@@ -22,22 +22,55 @@ function PrintDataOfSolder({
     },
     []
   );
+  const contentRef = useRef<HTMLDivElement>(null);
+  const reactToPrintFn = useReactToPrint({
+    contentRef,
+    onAfterPrint: () => {},
+  });
   const inputRef = useRef(null);
   const handleFormSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      reactToPrintFn();
+      if (window.innerWidth > 750) {
+        reactToPrintFn();
+      }
+
+      if (contentRef.current && window.innerWidth < 750) {
+        const newWindow = window.open("", "_blank", "width=400,height=300");
+
+        if (newWindow) {
+          newWindow.document.write(`<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    ${contentRef.current?.innerHTML || ""}
+  </body>
+</html>`);
+          newWindow.document.close();
+          newWindow.focus();
+
+          newWindow.onload = function () {
+            newWindow.print();
+            newWindow.close();
+          };
+          // have error here not woking
+          newWindow.onclose = function () {
+            setShowOutput(false);
+          };
+        } else {
+          console.error("Failed to open new window.");
+        }
+      }
       setPopupTextOfSolder(false);
     },
     [setValue, setPopupTextOfSolder]
   );
 
-  const [showOutput, setShowOutput] = useState(false);
-
-  const contentRef = useRef<HTMLDivElement>(null);
-  const reactToPrintFn = useReactToPrint({
-    contentRef,
-  });
+  const [showOutput, setShowOutput] = useState(window.innerWidth < 750);
 
   if (popupTextOfSolder) {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -62,15 +95,17 @@ function PrintDataOfSolder({
         >
           طــبــاعــة اثــبــات تــجــنــيــد
         </Button>
-        <label htmlFor="show">
-          عرض قبل الطباعة
-          <input
-            type="checkbox"
-            onChange={() => setShowOutput((prive) => !prive)}
-            name="show"
-            id="show"
-          />
-        </label>
+        {dataSelected.length > 0 && (
+          <label htmlFor="show" className={`sm:block hidden`}>
+            عرض قبل الطباعة
+            <input
+              type="checkbox"
+              onChange={() => setShowOutput((prive) => !prive)}
+              name="show"
+              id="show"
+            />
+          </label>
+        )}
       </ButtonGroup>
       <Popup
         isVisible={popupTextOfSolder}
@@ -107,13 +142,13 @@ function PrintDataOfSolder({
         }}
       />
 
-      {dataSelected.map(
+      {dataSelected.slice(-1).map(
         (dataIndex) =>
           showOutput && (
             <div
               ref={contentRef}
               key={dataIndex}
-              className={`text-2xl flex flex-col gap-4 relative left-[-3%] mt-2 w-[740px] h-[1095px] z-10`}
+              className={`text-2xl flex flex-col gap-4 relative left-[-3%] w-[740px] h-[1095px] z-10`}
             >
               <div className={`absolute z-10 top-[23.8%]`}>
                 <p className={`px-8 font-semibold text-black `}>{value}</p>
@@ -129,7 +164,8 @@ function PrintDataOfSolder({
                   <div>
                     {rows[dataIndex][8]} - {rows[dataIndex][9]}
                   </div>
-                  <div >
+                  <div>
+                    م
                     {convertNumberToLang(
                       `${handleSineorDate(rows[dataIndex])}`,
                       "ar"
@@ -166,10 +202,9 @@ export default PrintDataOfSolder;
 function handleSineorDate(data: any) {
   // need change data to en data becouse can incaludes for the data.
   const enDate = convertArabicDateToEnglish(data[4]);
-  const seniorDay = enDate[0];
+  // const seniorDay = enDate[0];
   const seniorMonth = enDate[1];
   const seniorYear = enDate[2];
-
 
   // غير قابلة
   if (data[6] === "غير قابلة") {
@@ -256,7 +291,6 @@ function handleSineorDate(data: any) {
         return `01/03/${+seniorYear + 3}`;
     }
   }
-  console.log({ seniorDay, seniorMonth, seniorYear });
 
   // دفعة 4
   if (seniorMonth.includes("4")) {
@@ -307,7 +341,6 @@ function handleSineorDate(data: any) {
         return `01/12/${+seniorYear + 3}`;
     }
   }
-
 }
 
 function convertNumberToLang(numberTxt: string, lang: "en" | "ar"): string {

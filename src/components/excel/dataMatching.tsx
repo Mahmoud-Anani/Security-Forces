@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { handleFileInputChange } from "./ExcelReader";
-import { useRecoilState } from "recoil";
-import { workbookDataState } from "../../stores/seniorDate";
+// import { useRecoilState } from "recoil";
+// import { workbookDataState } from "../../stores/seniorDate";
 import { toast } from "react-toastify";
 
 function DataMatching() {
-  const [data] = useRecoilState(workbookDataState);
+  // const [data] = useRecoilState(workbookDataState);
 
   const [fileMatchOne, setFileMatchOne] = useState([]);
   const [fileMatchOneTitles, setFileMatchOneTitles] = useState([]);
@@ -55,18 +55,18 @@ function DataMatching() {
       obj['coulmnsSelections']= fileMatchOne['fileMatchOne']
   }
   */
-    const newData = data.map((row, index) => {
-      if (
-        `${row[1]}`.split(" ").slice(0, 4).join("") ===
-        `${fileMatchOne[index][1] || ""}`.split(" ").slice(0, 4).join("")
-      ) {
-        coulmnsSelections.map(
-          (coulmn) => (row[coulmn] = fileMatchOne[index][coulmn])
-        );
-      }
-    });
+    // const newData = data.map((row, index) => {
+    //   if (
+    //     `${row[1]}`.split(" ").slice(0, 4).join("") ===
+    //     `${fileMatchOne[index][1] || ""}`.split(" ").slice(0, 4).join("")
+    //   ) {
+    //     coulmnsSelections.map(
+    //       (coulmn) => (row[coulmn] = fileMatchOne[index][coulmn])
+    //     );
+    //   }
+    // });
 
-    console.log(newData);
+    // console.log(newData);
 
     // console.log(data, fileMatchOne, coulmnsSelections);
   };
