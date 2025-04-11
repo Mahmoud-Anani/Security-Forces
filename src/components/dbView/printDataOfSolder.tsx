@@ -97,7 +97,7 @@ function PrintDataOfSolder({
           طــبــاعــة اثــبــات تــجــنــيــد
         </Button>
         {dataSelected.length > 0 && (
-          <label htmlFor="show" className={`sm:block hidden`}>
+          <label htmlFor="show" className={``}>
             عرض قبل الطباعة
             <input
               type="checkbox"
