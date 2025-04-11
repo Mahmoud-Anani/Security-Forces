@@ -142,6 +142,7 @@ function PrintDataOfSolder({
         }}
       />
 
+      
       {dataSelected.slice(-1).map(
         (dataIndex) =>
           showOutput && (
