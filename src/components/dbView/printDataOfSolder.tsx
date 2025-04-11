@@ -150,7 +150,7 @@ function PrintDataOfSolder({
               key={dataIndex}
               className={`sm:text-2xl text-6xl flex flex-col gap-4 relative left-[-3%] w-[740px] h-[1095px] z-10`}
             >
-              <div className={`absolute z-10 sm:top-[23.8%] top-[30.8%]`}>
+              <div className={`absolute z-10 sm:top-[23.8%] top-[26.8%]`}>
                 <p
                   style={{ direction: "rtl" }}
                   className={`px-8 font-semibold text-black`}
