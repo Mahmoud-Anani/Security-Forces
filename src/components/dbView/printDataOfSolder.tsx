@@ -153,7 +153,7 @@ function PrintDataOfSolder({
               <div className={`absolute z-10 top-[23.8%]`}>
                 <p style={{direction:"rtl"}} className={`px-8 font-semibold text-black`}>{value}</p>
                 <div
-                  className={`text-center flex flex-col gap-[20px] mr-12 sticky sm:mt-[65px] mt-[300px] font-semibold text-black`}
+                  className={`text-center flex flex-col gap-[20px] mr-12 sticky sm:mt-[65px] mt-[600px] font-semibold text-black`}
                 >
                   <div>{rows[dataIndex][1]}</div>
                   <div>{convertNumberToLang(rows[dataIndex][4], "ar")}م</div>
