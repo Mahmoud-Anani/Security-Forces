@@ -161,11 +161,13 @@ function PrintDataOfSolder({
                 <div
                   className={`text-center flex flex-col gap-[20px] mr-12 sticky sm:mt-[65px] mt-[150px] font-semibold text-black`}
                 >
-                  <div>{rows[dataIndex][1]}</div>
+                  <div className="sm:mb-0 mb-4">{rows[dataIndex][1]}</div>
                   <div>{convertNumberToLang(rows[dataIndex][4], "ar")}م</div>
                   <div>{convertNumberToLang(rows[dataIndex][7], "ar")}</div>
                   <div>{convertNumberToLang(rows[dataIndex][11], "ar")}</div>
-                  <div>{convertNumberToLang(rows[dataIndex][10], "ar")}</div>
+                  <div className="sm:mt-0 mt-4">
+                    {convertNumberToLang(rows[dataIndex][10], "ar")}
+                  </div>
 
                   <div>
                     {rows[dataIndex][8]} - {rows[dataIndex][9]}
