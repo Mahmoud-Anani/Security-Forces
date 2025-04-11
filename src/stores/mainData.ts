@@ -18,8 +18,15 @@ export const linksApp = [
   {
     name: "دفع جديد",
     link: "/add-soldier",
-  },
+  }
 ];
+/*
+,
+  {
+    name: "دمج البيانات",
+    link: "/data-matching",
+  },
+*/
 
 export const listSSFs = [
   "القاهرة",
@@ -122,7 +129,7 @@ export interface ColumnData {
   recruitmentDate: string | Date; // "تاريخ التجنيد"
   qualificationType: string; // "نوع المؤهل"
   reserveType: string; // "نوع الرديف"
-  policeNumber: string; // "رقم الشرطة"
+  policeNumber: string; // 7 "رقم الشرطة"
   governorate: string; // "المحافظة" !
   residence: string; // "محل الإقامة"
   nationalId: string; // "الرقم القومي"

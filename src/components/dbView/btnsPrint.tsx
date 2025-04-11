@@ -9,6 +9,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import Popup from "../utils/popup";
 import { listColumns } from "../../stores/mainData";
+import PrintDataOfSolder from "./printDataOfSolder";
 
 function BtnsPrint() {
   const [dataSelected] = useRecoilState(dataSelectedState);
@@ -18,7 +19,7 @@ function BtnsPrint() {
   const [coulmnsPrintState, setCoulmnsPrintState] = useState<string[]>([]);
 
   // console.log("coulmnsPrintState", coulmnsPrintState);
-  // console.log("dataSelected", dataSelected); [0,1,2,4,8]
+  // console.log("dataSelected", dataSelected); // [0,1,2,4,8]
   // console.log("rows", rows);[{row}]
 
   const currentYearMonthDayAR = new Date().toLocaleString("ar-EG", {
@@ -67,6 +68,13 @@ function BtnsPrint() {
     [setValue, setEnterSheetName, setIsOnlyNames]
   );
   const [closeNote, setCloseNote] = useState(true);
+
+  if (enterSheetName) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
   return (
     <>
       <div className={`absolute top-0 left-[200vw] -z-10`}>
@@ -150,6 +158,7 @@ function BtnsPrint() {
         </div>
         {/* Prinet Any Coulmns */}
       </div>
+
       <ButtonGroup
         className={`flex gap-1 w-full justify-between`}
         variant="contained"
@@ -179,8 +188,10 @@ function BtnsPrint() {
         >
           طـبـاعـة حــســب الــجــدول
         </Button>
+
         {/* <Button className={`w-full !text-[20px] !bg-[#c27272df] !border-0 !rounded-none !rounded-l-[5px]`}>Three</Button> */}
       </ButtonGroup>
+      <PrintDataOfSolder {...{ rows, dataSelected }} />
       <div
         style={{ fontFamily: "Aref Ruqaa" }}
         className={`bg-[#ad686a52] ${
@@ -212,7 +223,7 @@ function BtnsPrint() {
       </div>
       <Popup
         isVisible={enterSheetName}
-        title="ادخل اسم االكشف"
+        title="ادخل اسم الكشف"
         content={
           <div className={`px-2 `}>
             <form

@@ -5,6 +5,7 @@ import SeniorDate from "./routes/seniordate";
 import DataBaseView from "./routes/dataBaseView";
 import DBAnalysis from "./routes/dBAnalysis";
 import AddSoldier from "./routes/addSoldier";
+import DataMatching from "./components/excel/dataMatching";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/data-base-view" element={<DataBaseView />} />
       <Route path="/analysis" element={<DBAnalysis />} />
       <Route path="/add-soldier" element={<AddSoldier />} />
+      <Route path="/data-matching" element={<DataMatching />} />
     </Routes>
   );
 }

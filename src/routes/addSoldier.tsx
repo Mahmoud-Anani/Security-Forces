@@ -25,7 +25,7 @@ function AddSoldier() {
     const religion = data.religion === "مسلم" ? "" : data.religion;
 
     let reserve: string | Date = data.reserve;
-
+    //! I have error here
     // غير قابلة
     if (data.reserveType === "غير قابلة") {
       // دفعة 1

@@ -21,6 +21,48 @@ function CheckFileExtension(event: React.DragEvent<HTMLDivElement>) {
   return true;
 }
 
+export const handleFileUpload = async (
+  file: File,
+  setData: any,
+  updateStorage: boolean = true
+) => {
+  const reader = new FileReader();
+  reader.readAsArrayBuffer(file);
+  reader.onload = async (e) => {
+    if (!e.target?.result) return;
+
+    const buffer = e.target.result as ArrayBuffer;
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.load(buffer);
+    const worksheet = workbook.worksheets[0];
+    const sheetData: any[][] = [];
+
+    worksheet.eachRow((row) => {
+      // @ts-ignore
+      const rowData = row.values.slice(1);
+      sheetData.push(rowData);
+    });
+    if (updateStorage) {
+      localStorage.setItem("workbookData", JSON.stringify(sheetData));
+    }
+    setData(sheetData);
+  };
+};
+
+export const handleFileInputChange = (
+  event: React.ChangeEvent<HTMLInputElement>,
+  setData: any,
+  updateStorage: boolean = true
+) => {
+  const extention = event.target.files?.[0].name.split(".").pop() || "";
+  if (!["xlsx", "xls"].includes(extention)) {
+    toast.error("الملف غير مدعوم");
+    return false;
+  }
+  const file = event.target.files?.[0];
+  if (file) handleFileUpload(file, setData, updateStorage);
+};
+
 const ExcelReader: React.FC = () => {
   // @ts-ignore
   const [data, setData] = useRecoilState<any[][] | [null]>(workbookDataState);
@@ -45,39 +87,6 @@ const ExcelReader: React.FC = () => {
       setEnterPasswordApp(false);
     }
   }, []);
-  const handleFileUpload = async (file: File) => {
-    const reader = new FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onload = async (e) => {
-      if (!e.target?.result) return;
-
-      const buffer = e.target.result as ArrayBuffer;
-      const workbook = new ExcelJS.Workbook();
-      await workbook.xlsx.load(buffer);
-      const worksheet = workbook.worksheets[0];
-      const sheetData: any[][] = [];
-
-      worksheet.eachRow((row) => {
-        // @ts-ignore
-        const rowData = row.values.slice(1);
-        sheetData.push(rowData);
-      });
-      localStorage.setItem("workbookData", JSON.stringify(sheetData));
-      setData(sheetData);
-    };
-  };
-
-  const handleFileInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const extention = event.target.files?.[0].name.split(".").pop() || "";
-    if (!["xlsx", "xls"].includes(extention)) {
-      toast.error("الملف غير مدعوم");
-      return false;
-    }
-    const file = event.target.files?.[0];
-    if (file) handleFileUpload(file);
-  };
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -86,7 +95,7 @@ const ExcelReader: React.FC = () => {
     }
     const file = event.dataTransfer.files?.[0];
 
-    if (file) handleFileUpload(file);
+    if (file) handleFileUpload(file, setData);
   };
 
   const [dragple, setDragple] = useState(false);
@@ -124,7 +133,7 @@ const ExcelReader: React.FC = () => {
             } text-[#cc6969]`}
             type="file"
             accept=".xlsx, .xls"
-            onChange={handleFileInputChange}
+            onChange={(e) => handleFileInputChange(e, setData)}
           />
         </div>
       )}
@@ -134,7 +143,7 @@ const ExcelReader: React.FC = () => {
         } text-[#cc6969]`}
         type="file"
         accept=".xlsx, .xls"
-        onChange={handleFileInputChange}
+        onChange={(e) => handleFileInputChange(e, setData)}
       />
       {data.length > 0 && <ViewDataExcel data={data} />}
     </div>

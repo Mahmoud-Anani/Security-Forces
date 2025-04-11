@@ -13,7 +13,7 @@ function Home() {
     enterPasswordAppState
   );
   if (enterPasswordApp) {
-    // window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     document.body.style.overflow = "hidden";
   } else {
     document.body.style.overflow = "auto";
@@ -63,8 +63,6 @@ function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
-      <DBAnalysis showLine={false} />
-
       <div className="flex flex-col gap-5 items-center">
         <h1
           style={{ fontFamily: "Aref Ruqaa" }}
@@ -76,6 +74,8 @@ function Home() {
           <ExcelReader />
         </div>
       </div>
+
+      <DBAnalysis showLine={false} />
 
       <Popup
         isVisible={enterPasswordApp}
