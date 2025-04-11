@@ -149,7 +149,7 @@ function PrintDataOfSolder({
             <div
               ref={contentRef}
               key={dataIndex}
-              className={`sm:text-2xl text-6xl flex flex-col gap-4 relative left-[-3%] sm:w-[740px] w-[780px] h-[1195px] sm:h-[1095px] z-10`}
+              className={`sm:text-2xl text-6xl flex flex-col gap-4 relative left-[-3%] sm:w-[740px] w-[780px] h-[1195px] sm:h-[1095px] mt-2 z-10`}
             >
               <div className={`absolute z-10 sm:top-[23.8%] top-[26.8%]`}>
                 <p
