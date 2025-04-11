@@ -55,7 +55,7 @@ function PrintDataOfSolder({
 
           newWindow.onload = function () {
             newWindow.print();
-            newWindow.close();
+            // newWindow.close();
           };
           // have error here not woking
           newWindow.onclose = function () {
