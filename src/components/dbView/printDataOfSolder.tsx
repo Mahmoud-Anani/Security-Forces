@@ -2,6 +2,7 @@ import { Button, ButtonGroup } from "@mui/material";
 import Popup from "../utils/popup";
 import { useCallback, useRef, useState } from "react";
 import imagePrintSolder from "../../../public/temp-data-of-solder.png";
+import imagePrintSolder2 from "../../../public/temp-data-of-solder-1.png";
 import { useReactToPrint } from "react-to-print";
 
 function PrintDataOfSolder({
@@ -179,7 +180,9 @@ function PrintDataOfSolder({
                 </div>
               </div>
               <img
-                src={imagePrintSolder}
+                src={
+                  window.innerWidth > 750 ? imagePrintSolder : imagePrintSolder2
+                }
                 className={`w-full h-full object-fill absolute top-0`}
               />
             </div>
